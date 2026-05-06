@@ -1,0 +1,46 @@
+{
+  "name": "HtmlParser",
+  "description": "用 Python html.parser 解析上游 HTML 内容，按 CSS 选择器或标签提取文本。适合从网页中抽取结构化数据。",
+  "default_config": {
+    "selector": "body",
+    "extract": "text",
+    "command": "uv run HtmlParser.py"
+  },
+  "instructions": "<strong>💡 HTML 解析组件：</strong><br/>• <code>selector</code>：CSS 选择器，如 <code>body</code>、<code>div.content</code>、<code>#main p</code>。<br/>• <code>extract</code>：<code>text</code>（提取文本）、<code>html</code>（提取 innerHTML）、<code>attr:href</code>（提取属性）。<br/>• 上游 payload 应为完整 HTML 字符串。",
+  "ui_schema": {
+    "selector": {
+      "label": "CSS 选择器",
+      "type": "text",
+      "placeholder": "body",
+      "desc": "要提取的目标元素，支持 tag、.class、#id 组合"
+    },
+    "extract": {
+      "label": "提取方式",
+      "type": "select",
+      "options": [
+        {
+          "label": "纯文本（去除标签）",
+          "value": "text"
+        },
+        {
+          "label": "内部 HTML（保留标签）",
+          "value": "html"
+        },
+        {
+          "label": "属性值（需配合 attr 参数）",
+          "value": "attr"
+        }
+      ]
+    },
+    "attr": {
+      "label": "属性名",
+      "type": "text",
+      "placeholder": "extract=attr 时填写，如 href、src",
+      "desc": "仅 extract=attr 时生效"
+    }
+  },
+  "requires_input": true,
+  "produces_output": true,
+  "is_builtin": false,
+  "group": "自定义组件"
+}

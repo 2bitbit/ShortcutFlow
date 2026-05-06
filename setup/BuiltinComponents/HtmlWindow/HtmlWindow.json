@@ -1,0 +1,90 @@
+{
+  "name": "HtmlWindow",
+  "description": "弹出自定义 HTML 窗口。设为 -1 的维度（x/y/width/height）自动适应内容或屏幕边沿：x=-1 贴右沿，y=-1 贴顶沿，width=-1 按内容宽度，height=-1 按内容高度。",
+  "default_config": {
+    "html_content": "<html><body style='background:#1a1a1a;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0'><h1>Hello ShortcutFlow!</h1></body></html>",
+    "title": "ShortcutFlow HTML",
+    "x": 200,
+    "y": 200,
+    "width": 600,
+    "height": 400,
+    "blocking": true,
+    "focus": false,
+    "resizable": true,
+    "always_on_top": false,
+    "window_label": "",
+    "close_aborts": true,
+    "close_aborts_silent": true
+  },
+  "instructions": "<strong>💡 HTML 窗口组件：</strong><br/>• 设为 <code>-1</code> 的维度自动适应：<code>x=-1</code> 贴屏幕右边，<code>y=-1</code> 贴顶，<code>width=-1</code> 按内容宽，<code>height=-1</code> 按内容高。<br/>• <code>html_content</code> 留空则使用上游 payload 文本。<br/>• <code>focus</code> 默认 false（不抢占焦点）。<br/>• <code>window_label</code> 用于 CloseWindow 定位。",
+  "ui_schema": {
+    "html_content": {
+      "label": "HTML 内容",
+      "type": "textarea",
+      "placeholder": "<html><body>Hello</body></html>",
+      "desc": "留空则使用上游 Payload 文本。",
+      "full_width": true
+    },
+    "title": {
+      "label": "窗口标题",
+      "type": "text",
+      "placeholder": "ShortcutFlow HTML"
+    },
+    "x": {
+      "label": "X 坐标",
+      "type": "number",
+      "desc": "-1 = 贴屏幕右边"
+    },
+    "y": {
+      "label": "Y 坐标",
+      "type": "number",
+      "desc": "-1 = 贴屏幕顶部"
+    },
+    "width": {
+      "label": "宽度",
+      "type": "number",
+      "desc": "-1 = 自适应内容宽度"
+    },
+    "height": {
+      "label": "高度",
+      "type": "number",
+      "desc": "-1 = 自适应内容高度"
+    },
+    "blocking": {
+      "label": "阻塞模式",
+      "type": "checkbox"
+    },
+    "focus": {
+      "label": "抢占焦点",
+      "type": "checkbox"
+    },
+    "close_aborts": {
+      "label": "关闭时熔断流",
+      "type": "checkbox",
+      "desc": "手动关闭窗口（❌）时终止流。Esc/CloseWindow 不触发。"
+    },
+    "close_aborts_silent": {
+      "label": "静默熔断",
+      "type": "checkbox",
+      "desc": "关闭时静默终止流，不弹错误框。仅 close_aborts=true 时生效。"
+    },
+    "resizable": {
+      "label": "可调大小",
+      "type": "checkbox"
+    },
+    "always_on_top": {
+      "label": "置顶",
+      "type": "checkbox"
+    },
+    "window_label": {
+      "label": "窗口标签",
+      "type": "text",
+      "placeholder": "留空自动生成",
+      "desc": "CloseWindow 定位用，留空自动分配。"
+    }
+  },
+  "requires_input": false,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-界面"
+}

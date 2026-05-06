@@ -1,0 +1,32 @@
+{
+  "name": "OCR",
+  "description": "基于 rust-paddle-ocr (MNN) 引擎构建的原生极致性能 OCR 节点。无需任何外挂。",
+  "default_config": {
+    "det_model": "models/PP-OCRv5_mobile_det.mnn",
+    "keys_path": "models/ppocr_keys_v5.txt",
+    "rec_model": "models/PP-OCRv5_mobile_rec.mnn"
+  },
+  "instructions": null,
+  "ui_schema": {
+    "det_model": {
+      "label": "检测模型路径 (det_model)",
+      "type": "text",
+      "placeholder": "models/PP-OCRv5_mobile_det.mnn"
+    },
+    "rec_model": {
+      "label": "识别模型路径 (rec_model)",
+      "type": "text",
+      "placeholder": "models/PP-OCRv5_mobile_rec.mnn"
+    },
+    "keys_path": {
+      "label": "字典路径 (keys_path)",
+      "type": "text",
+      "placeholder": "models/ppocr_keys_v5.txt",
+      "full_width": true
+    }
+  },
+  "requires_input": true,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件-AI组件"
+}

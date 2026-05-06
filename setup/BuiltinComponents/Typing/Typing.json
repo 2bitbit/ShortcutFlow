@@ -1,0 +1,20 @@
+{
+  "name": "Typing",
+  "description": "模拟打字。",
+  "default_config": {
+    "speed_ms": 0
+  },
+  "instructions": "<strong>💡 硬件级打字机指南：</strong><br />• 该组件将<strong>无视操作系统的“禁止粘贴”安全策略</strong>。它会在引擎后台隐匿读取传入的文本，并利用键盘物理驱动将文本<strong>逐个字符</strong>按顺序敲击出来。<br />• <strong>间隔速度</strong>：设置为 0 代表最高速倾泻。若目标应用有变态的防机刷检测，请适当增加间隔以模拟真人（如 10~50ms）。",
+  "ui_schema": {
+    "speed_ms": {
+      "label": "打字间隔速度 (ms)",
+      "type": "number",
+      "placeholder": "0",
+      "full_width": true
+    }
+  },
+  "requires_input": true,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-模拟操作"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "__debug_flow_OCR",
+  "display_name": "🔬 OCR 识别测试",
+  "description": "框选截图 → OCR 识别文字 → 弹窗显示。测试 ScreenCapture + OCR + Popup。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "o1",
+      "component_name": "ScreenCapture",
+      "config": {}
+    },
+    {
+      "id": "o2",
+      "component_name": "OCR",
+      "config": {}
+    },
+    {
+      "id": "o3",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

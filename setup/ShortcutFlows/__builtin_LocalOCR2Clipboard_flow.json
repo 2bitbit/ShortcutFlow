@@ -1,0 +1,41 @@
+{
+  "id": "__builtin_LocalOCR2Clipboard_flow",
+  "display_name": "屏幕截取OCR至剪贴板",
+  "description": "框选屏幕区域，利用本地 RapidOCR 将图片转为文字并复制。",
+  "group": "内置流",
+  "shortcut": "Control+Alt+S",
+  "startup_delay_ms": 0,
+  "nodes": [
+    {
+      "id": "o1",
+      "delay_before_ms": 0,
+      "config": {},
+      "component_name": "ScreenCapture"
+    },
+    {
+      "id": "o2",
+      "delay_before_ms": 0,
+      "config": {},
+      "component_name": "OCR"
+    },
+    {
+      "id": "o3",
+      "delay_before_ms": 0,
+      "config": {
+        "case_insensitive": false,
+        "dot_matches_new_line": false,
+        "multi_line": false,
+        "pattern": "",
+        "replacement": ""
+      },
+      "component_name": "Regex"
+    },
+    {
+      "id": "o4",
+      "delay_before_ms": 0,
+      "config": {},
+      "component_name": "WriteClipboard"
+    }
+  ],
+  "cwd": null
+}

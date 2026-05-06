@@ -1,0 +1,27 @@
+{
+  "name": "KeyListener",
+  "description": "监听一组自定义按键，当用户按下任一按键时，将该按键对应的自定义 metadata 和 payload 传输给下一个节点，然后继续执行后续流程。",
+  "default_config": {
+    "keys": "[{\"key\": \"Alt+F1\", \"metadata\": {\"action\": \"option_1\"}, \"payload\": \"用户选择了选项一\"}, {\"key\": \"Alt+F2\", \"metadata\": {\"action\": \"option_2\"}, \"payload\": \"用户选择了选项二\"}]",
+    "timeout_secs": 120
+  },
+  "instructions": "<strong>💡 按键监听组件：</strong><br/>• <code>keys</code>：按键数组，每项包含 <code>key</code>（快捷键组合）、<code>metadata</code>（JSON 对象）和 <code>payload</code>（字符串或 JSON）。<br/>• <code>timeout_secs</code>：超时时间（秒），超时后自动取消监听，不传递任何数据。设为 0 表示无限等待。<br/>• <code>window_label</code>（可选）：关联的 HtmlWindow 标签。若设置，当该窗口被用户关闭时自动取消按键监听。<br/>• 快捷键格式：<code>修饰键+字母</code>，如 <code>Alt+F1</code>、<code>Ctrl+Shift+K</code>。<br/>• 当任一按键被按下，其他按键会自动取消监听。",
+  "ui_schema": {
+    "keys": {
+      "label": "按键列表",
+      "type": "textarea",
+      "desc": "JSON 数组格式：[{\"key\":\"Alt+F1\",\"metadata\":{},\"payload\":\"...\"}]",
+      "placeholder": "[{\"key\":\"Alt+F1\",\"metadata\":{\"action\":\"opt1\"},\"payload\":\"选项一\"}]",
+      "full_width": true
+    },
+    "timeout_secs": {
+      "label": "超时（秒）",
+      "type": "number",
+      "desc": "0 = 无限等待，默认 120 秒"
+    }
+  },
+  "requires_input": false,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件-输入"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "ReadClipboard",
+  "description": "静默读取并提取当前系统剪贴板中的数据，传给下一个节点。不会触发任何键盘模拟动作。",
+  "default_config": {},
+  "instructions": null,
+  "ui_schema": null,
+  "requires_input": false,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件-剪贴板操作"
+}

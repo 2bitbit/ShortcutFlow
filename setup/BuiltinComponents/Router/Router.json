@@ -1,0 +1,28 @@
+{
+  "name": "Router",
+  "description": "条件路由器：按 rules 顺序匹配 payload，命中则执行对应子流；全不命中则走 default_subflow_id（透传流）。\n\n匹配条件类型：\n- regex: 正则匹配 payload\n- char_count_lte: 字符数 ≤ value\n- char_count_gt: 字符数 > value",
+  "default_config": {
+    "rules": "[{\"condition\": {\"type\": \"char_count_gt\", \"value\": 10}, \"subflow_id\": \"__example_sentence_flow\"}]",
+    "default_subflow_id": "__builtin_passthrough_flow"
+  },
+  "instructions": "<strong>💡 条件路由指南：</strong><br/>• <code>rules</code>：按顺序匹配，<strong>第一条命中即停止</strong>。<br/>• 每条规则包含 <code>condition</code>（条件）和 <code>subflow_id</code>（命中后执行的流 ID）。<br/>• <code>default_subflow_id</code>：所有规则都不命中时执行的兜底流。<br/>• 支持的 condition.type：<code>regex</code>（正则匹配 payload）、<code>char_count_lte</code>（字符数≤value）、<code>char_count_gt</code>（字符数>value）。<br/>• 子流接收当前 payload 作为输入，Router 将子流输出透传给下游节点。",
+  "ui_schema": {
+    "rules": {
+      "label": "路由规则",
+      "type": "textarea",
+      "desc": "JSON 数组：[{\"condition\":{\"type\":\"regex\",\"pattern\":\"^\\\\w+$\"},\"subflow_id\":\"xxx\"}]",
+      "placeholder": "[{\"condition\":{\"type\":\"char_count_gt\",\"value\":10},\"subflow_id\":\"__branch_sentence\"}]",
+      "full_width": true
+    },
+    "default_subflow_id": {
+      "label": "默认子流 ID",
+      "type": "text",
+      "placeholder": "__builtin_passthrough_flow",
+      "desc": "全部不命中时执行的兜底流。建议设为透传流。"
+    }
+  },
+  "requires_input": true,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件"
+}

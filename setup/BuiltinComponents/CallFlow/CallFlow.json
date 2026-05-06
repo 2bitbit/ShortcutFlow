@@ -1,0 +1,19 @@
+{
+  "name": "CallFlow",
+  "description": "执行子流程：能够调用其他已经配置好的工作流。",
+  "default_config": {
+    "flow_id": ""
+  },
+  "instructions": "<strong>💡 执行子流程：</strong><br/>允许在此节点通过指定 `flow_id` 触发并运行另一个子流程。",
+  "ui_schema": {
+     "flow_id": {
+       "label": "子流程 ID",
+       "type": "text",
+       "desc": "目标工作流的 ID，例如 flow_builtin_1"
+     }
+  },
+  "requires_input": false,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件"
+}

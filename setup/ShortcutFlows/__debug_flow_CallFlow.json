@@ -1,0 +1,20 @@
+{
+  "id": "__debug_flow_CallFlow",
+  "display_name": "🔬 子流调用测试",
+  "description": "CallFlow 调用专用 HTTP 子流（不吞数据）→ Popup 显示返回的 HTML。测试 CallFlow 数据透传机制。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "c1",
+      "component_name": "CallFlow",
+      "config": {
+        "flow_id": "__debug_flow_CallFlow__http"
+      }
+    },
+    {
+      "id": "c2",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

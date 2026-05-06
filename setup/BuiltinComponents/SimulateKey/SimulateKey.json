@@ -1,0 +1,32 @@
+{
+  "name": "SimulateKey",
+  "description": "按键模拟器。",
+  "default_config": {
+    "interval_ms": 100,
+    "sequence": [
+      {
+        "action": "Click",
+        "key": "ctrl+c",
+        "tap_count": 1
+      }
+    ]
+  },
+  "instructions": "<strong>💡 键盘输入支持指南：</strong><br />• 组合键使用 <code>+</code> 号相连，如 <code>ctrl + alt + a</code>（无视内部多余空格和控制键的大小写混杂）。<br />• 常见控制键：<code>Ctrl</code>, <code>Alt</code>, <code>Shift</code>, <code>Win/Meta</code> 等。<br />• 普通字符（如字母）<strong>严格区分原始大小写</strong>，底层执行时 <code>a</code> 就是小写，<code>A</code> 就是大写。<br />• <strong>[特例声明]</strong>：由于解析机制冲突，输入真实空格按键请填单词 <code>space</code>；输入加号请填 <code>plus</code>！其余各种英文标点直接敲入字面上原有的样子即可（例如 <code>-</code>, <code>.</code>, <code>,</code> 等等）。",
+  "ui_schema": {
+    "interval_ms": {
+      "label": "按键间隔时间 (ms)",
+      "desc": "默认 100",
+      "type": "number",
+      "full_width": true
+    },
+    "sequence": {
+      "label": "执行序列 (将自上而下顺次执行)",
+      "type": "sequence_key",
+      "full_width": true
+    }
+  },
+  "requires_input": false,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-模拟操作"
+}

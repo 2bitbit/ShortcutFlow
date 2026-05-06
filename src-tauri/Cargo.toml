@@ -1,0 +1,59 @@
+[package]
+name = "shortcutflow"
+version = "0.1.1"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "shortcutflow_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri-plugin-dialog = "2"
+sysinfo = "0.30"
+tokio = { version = "1.50.0", features = ["full"] }
+arboard = "3"
+enigo = "0.6"
+reqwest = { version = "0.12", features = ["json"] }
+dirs = "5"
+xcap = "0.9"
+image = "0.25"
+base64 = "0.22"
+log = "0.4.29"
+env_logger = "0.11"
+minifb = "0.28.0"
+tauri-plugin-store = "2"
+tauri-plugin-log = "2"
+tauri-plugin-fs = "2"
+ocr-rs = { git = "https://github.com/zibo-chen/rust-paddle-ocr.git" }
+anyhow = "1.0.102"
+rust-embed = "8.11.0"
+rfd = "0.17.2"
+walkdir = "2.5.0"
+strum = "0.28.0"
+strum_macros = "0.28.0"
+url = "2"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-autostart = "2"
+tauri-plugin-global-shortcut = "2"
+
+[target."cfg(windows)".dependencies]
+windows-sys = { version = "0.61.2", features = [
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_Foundation",
+] }
+regex = "1"

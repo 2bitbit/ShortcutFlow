@@ -1,0 +1,7 @@
+{
+  "id": "__builtin_passthrough_flow",
+  "display_name": "透传流",
+  "description": "不做任何处理，原样透传上游数据。用于 Router 组件的默认兜底流。",
+  "group": "内置子流",
+  "nodes": []
+}

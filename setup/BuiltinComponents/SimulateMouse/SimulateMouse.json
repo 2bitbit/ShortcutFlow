@@ -1,0 +1,32 @@
+{
+  "name": "SimulateMouse",
+  "description": "鼠标模拟。",
+  "default_config": {
+    "interval_ms": 100,
+    "sequence": [
+      {
+        "action": "Click",
+        "button_type": "Left",
+        "tap_count": 1
+      }
+    ]
+  },
+  "instructions": "<strong>💡 鼠标输入支持指南：</strong><br />• <strong>坐标移动</strong>：定点至绝对位置请直接闭眼输入像素点如 <code>100,200</code>；相对目标当下的偏移运动则请<strong>务必带上加减号</strong>，如 <code>+50,-20</code> 或 <code>-10,+0</code>。<br />• <strong>动作执行逻辑</strong>：底层驱动严格依据列表从上往下线性执行。如需完成诸如“光标闪现到目标并双击右键”的复杂招式，请把拆分成两个步进项（【移动】动作 -> 【右键/点按/2次】动作）。",
+  "ui_schema": {
+    "interval_ms": {
+      "label": "操作间隔时间 (ms)",
+      "desc": "默认 100",
+      "type": "number",
+      "full_width": true
+    },
+    "sequence": {
+      "label": "执行序列 (将自上而下顺次执行)",
+      "type": "sequence_mouse",
+      "full_width": true
+    }
+  },
+  "requires_input": false,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-模拟操作"
+}

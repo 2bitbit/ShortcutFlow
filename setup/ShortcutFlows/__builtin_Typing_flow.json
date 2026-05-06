@@ -1,0 +1,25 @@
+{
+  "id": "__builtin_Typing_flow",
+  "display_name": "极速模拟人手打字",
+  "description": "模拟打字以绕过禁止粘贴。内容为剪贴板内容。",
+  "group": "内置流",
+  "shortcut": null,
+  "startup_delay_ms": 0,
+  "nodes": [
+    {
+      "id": "t1",
+      "delay_before_ms": 0,
+      "config": {},
+      "component_name": "ReadClipboard"
+    },
+    {
+      "id": "t2",
+      "delay_before_ms": 50,
+      "config": {
+        "speed_ms": 1
+      },
+      "component_name": "Typing"
+    }
+  ],
+  "cwd": null
+}

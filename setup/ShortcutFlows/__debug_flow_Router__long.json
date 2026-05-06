@@ -1,0 +1,21 @@
+{
+  "id": "__debug_flow_Router__long",
+  "display_name": "🔬 Router子流-长文本",
+  "description": "Router 命中的长文本分支：EmitData 构造消息 → Popup。",
+  "group": "调试子流",
+  "nodes": [
+    {
+      "id": "e1",
+      "component_name": "EmitData",
+      "config": {
+        "payload": "✅ Router 命中：长文本分支（含空格或 >10 字）",
+        "metadata": "{}"
+      }
+    },
+    {
+      "id": "p1",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

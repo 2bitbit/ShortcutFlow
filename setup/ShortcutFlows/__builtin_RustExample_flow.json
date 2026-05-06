@@ -1,0 +1,29 @@
+{
+  "id": "__builtin_RustExample_flow",
+  "display_name": "脚本微服务：Rust 图片解析保存示例",
+  "description": "【教学用例】此流会将框选区域，传达到 Rust 原生编译组件来遵照你在界面配置的文件路径保存截图，最后输出成功给弹窗组件。",
+  "group": "自定义扩展示例教程",
+  "shortcut": null,
+  "startup_delay_ms": 0,
+  "nodes": [
+    {
+      "id": "rs1",
+      "delay_before_ms": 0,
+      "config": {},
+      "component_name": "ScreenCapture"
+    },
+    {
+      "id": "rs2",
+      "delay_before_ms": 0,
+      "config": {},
+      "component_name": "RustExample"
+    },
+    {
+      "id": "rs3",
+      "delay_before_ms": 0,
+      "config": {},
+      "component_name": "Popup"
+    }
+  ],
+  "cwd": null
+}

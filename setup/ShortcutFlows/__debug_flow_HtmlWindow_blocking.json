@@ -1,0 +1,28 @@
+{
+  "id": "__debug_flow_HtmlWindow_blocking",
+  "display_name": "🔬 HTML 窗口测试（阻塞）",
+  "description": "弹出阻塞 HTML 窗口，需手动关闭后流程才继续。测试 HtmlWindow blocking=true 模式。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "h1",
+      "component_name": "HtmlWindow",
+      "config": {
+        "html_content": "<html>\n  <body style='background:#1a1a2e;color:#e0e0e0;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0'>\n    <div style='text-align:center'>\n      <h1 style='color:#e94560'>⏸️ 阻塞模式</h1>\n        <p style='color:#888'>ShortcutFlow 调试测试 — 阻塞模式</p>\n          <p style='color:#666;margin-top:20px;font-size:14px'>请<span style='color:#fbbf24'>手动关闭</span>此窗口以继续流程</p>\n          </div>\n        </body>\n      </html>",
+        "x": 1250,
+        "y": 0,
+        "width": 450,
+        "height": 350,
+        "blocking": true,
+        "title": "🔬 Debug HtmlWindow (阻塞)",
+        "resizable": true,
+        "always_on_top": true
+      }
+    },
+    {
+      "id": "p1",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

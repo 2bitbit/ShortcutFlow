@@ -1,0 +1,11 @@
+{
+  "name": "ClearClipboard",
+  "description": "清空剪贴板内容。",
+  "default_config": {},
+  "instructions": "<strong>💡 清空剪贴板：</strong><br/>直接置空剪贴板。可配合“透传（pass_through）”开关使用",
+  "ui_schema": {},
+  "requires_input": false,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-剪贴板操作"
+}

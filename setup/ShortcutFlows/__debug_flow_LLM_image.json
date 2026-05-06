@@ -1,0 +1,26 @@
+{
+  "id": "__debug_flow_LLM_image",
+  "display_name": "🔬 LLM 图片识别测试",
+  "description": "截图区选 → LLM 图片识别 → Popup 显示结果。⚠️ 需要在 LLM 组件设置中：input_format 选「图片 (Base64)」并配置 API Key。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "sc1",
+      "component_name": "ScreenCapture",
+      "config": {}
+    },
+    {
+      "id": "llm1",
+      "component_name": "LLM",
+      "config": {
+        "system_prompt": "描述截图中的内容，简洁回复。",
+        "input_format": "image"
+      }
+    },
+    {
+      "id": "pop1",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

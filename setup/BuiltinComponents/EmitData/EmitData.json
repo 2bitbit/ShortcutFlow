@@ -1,0 +1,29 @@
+{
+  "name": "EmitData",
+  "description": "手动构造并输出数据。在 config 中直接设定 payload 和 metadata，作为下游节点的输入。常用于测试和调试——无需依赖上游组件。",
+  "default_config": {
+    "payload": "",
+    "metadata": "{}"
+  },
+  "instructions": "<strong>💡 手动数据注入：</strong><br/>• <code>payload</code>：传递给下游节点的数据内容（字符串）。<br/>• <code>metadata</code>：JSON 对象，会合并到下游节点的配置中。<br/>• 适用于测试流、Router 调试等场景。",
+  "ui_schema": {
+    "payload": {
+      "label": "Payload",
+      "type": "textarea",
+      "placeholder": "输入要传递的数据...",
+      "desc": "传递给下游节点的数据",
+      "full_width": true
+    },
+    "metadata": {
+      "label": "Metadata (JSON)",
+      "type": "textarea",
+      "placeholder": "{}",
+      "desc": "JSON 对象格式的元数据",
+      "full_width": true
+    }
+  },
+  "requires_input": false,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件"
+}

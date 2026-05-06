@@ -1,0 +1,11 @@
+{
+  "name": "WriteClipboard",
+  "description": "将传入的文本数据静默写入系统剪贴板，不触发任何模拟键盘动作。",
+  "default_config": {},
+  "instructions": null,
+  "ui_schema": null,
+  "requires_input": true,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-剪贴板操作"
+}

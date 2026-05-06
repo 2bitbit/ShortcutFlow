@@ -1,0 +1,20 @@
+{
+  "id": "__debug_flow_Shell",
+  "display_name": "🔬 Shell 执行测试",
+  "description": "Shell 执行 echo 命令 → 弹窗显示输出。测试 Shell + Popup。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "s1",
+      "component_name": "Shell",
+      "config": {
+        "command": "echo ✅ ShortcutFlow Shell component is working!"
+      }
+    },
+    {
+      "id": "s2",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

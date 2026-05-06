@@ -1,0 +1,25 @@
+{
+  "name": "PythonExample",
+  "description": "基于 UV 实现的图片保存脚本。它演示了如何从管线读取 JSON 以及处理后向下连通。可用作自定义组件的精美模板！",
+  "default_config": {
+    "command": "uv run PythonExample.py",
+    "save_path": "~/Desktop/SF_PyExample.png"
+  },
+  "instructions": "<strong>💡 Python 图片处理示例：</strong><br/>该节点展示了如何接收上个节点产生的数据，来进行自定义逻辑。",
+  "ui_schema": {
+    "command": {
+      "label": "本地终端执行命令",
+      "desc": "启动该脚本使用的完整命令，建议添加 python 的系统绝对路径。",
+      "placeholder": "uv run PythonExample.py"
+    },
+    "save_path": {
+      "label": "保存截图的绝对路径",
+      "desc": "提取出来的图片该去向何方？",
+      "placeholder": "~/Desktop/SF_PyExample.png"
+    }
+  },
+  "requires_input": true,
+  "produces_output": true,
+  "is_builtin": false,
+  "group": "自定义示例"
+}

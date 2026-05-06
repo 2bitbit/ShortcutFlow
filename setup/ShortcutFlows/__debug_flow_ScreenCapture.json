@@ -1,0 +1,18 @@
+{
+  "id": "__debug_flow_ScreenCapture",
+  "display_name": "🔬 截图测试",
+  "description": "框选区域截图 → 弹出原始 Base64 文本。（测试 ScreenCapture + Popup）",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "s1",
+      "component_name": "ScreenCapture",
+      "config": {}
+    },
+    {
+      "id": "s2",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

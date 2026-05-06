@@ -1,0 +1,23 @@
+{
+  "id": "__debug_flow_ClearClipboard",
+  "display_name": "🔬 清剪贴板测试 ⚠️",
+  "description": "⚠️ 警告：会清空你的剪贴板！清空后读取验证 → 弹窗（应为空）。测试 ClearClipboard + ReadClipboard + Popup。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "c1",
+      "component_name": "ClearClipboard",
+      "config": {}
+    },
+    {
+      "id": "c2",
+      "component_name": "ReadClipboard",
+      "config": {}
+    },
+    {
+      "id": "c3",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "__debug_flow_Router__short",
+  "display_name": "🔬 Router子流-短文本",
+  "description": "Router 默认兜底分支：EmitData 构造消息 → Popup。",
+  "group": "调试子流",
+  "nodes": [
+    {
+      "id": "e1",
+      "component_name": "EmitData",
+      "config": {
+        "payload": "⚠️ Router 兜底：短文本分支（全部规则未命中）",
+        "metadata": "{}"
+      }
+    },
+    {
+      "id": "p1",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

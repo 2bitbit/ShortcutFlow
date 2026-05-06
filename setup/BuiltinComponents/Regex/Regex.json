@@ -1,0 +1,42 @@
+{
+  "name": "Regex",
+  "description": "对payload按正则表达式替换。支持捕获组、反向引用替换。\n替换语法：使用 $1 表示第 1 个捕获组，使用 ${name} 引用命名捕获组，$0 表示匹配到的全部文本。\n标志说明：\n1. 忽略大小写(i)；\n2. 多行模式(m)：使得 ^ 和 $ 可以匹配字符串中每一行的起始和结尾；\n3. 点号匹配换行(s)：允许 . 匹配包括换行符。",
+  "default_config": {
+    "case_insensitive": false,
+    "dot_matches_new_line": false,
+    "multi_line": false,
+    "pattern": "",
+    "replacement": ""
+  },
+  "instructions": "<strong>💡 正则替换指南：</strong><br />• <strong>捕获组引用</strong>：在“替换内容”中，使用 <code>$1</code>, <code>$2</code> 来提取及指代正则中第1、第2个圆括号匹配到的内容。<br />• <strong>全量指代</strong>：使用 <code>$0</code> 代表刚刚被匹配体拿到的完整文本片段。",
+  "ui_schema": {
+    "pattern": {
+      "label": "正则表达式 (Pattern)",
+      "type": "text",
+      "placeholder": "例如: (\\d+)-(\\w+)",
+      "full_width": true
+    },
+    "replacement": {
+      "label": "替换内容 (Replacement) [使用 $1, $2 反向引用]",
+      "type": "text",
+      "placeholder": "例如: 字母是$2, 数字是$1",
+      "full_width": true
+    },
+    "case_insensitive": {
+      "label": "i (忽略大小写)",
+      "type": "checkbox"
+    },
+    "multi_line": {
+      "label": "m (多行 ^/$)",
+      "type": "checkbox"
+    },
+    "dot_matches_new_line": {
+      "label": "s (点号匹配换行)",
+      "type": "checkbox"
+    }
+  },
+  "requires_input": true,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件"
+}

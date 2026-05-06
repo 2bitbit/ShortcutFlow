@@ -1,0 +1,21 @@
+{
+  "name": "Shell",
+  "description": "极度灵活的终极执行器。将数据流压抑进 `stdin` 作为管道参数强拉当前工作空间内的所有可执行命令，实现无边界处理。",
+  "default_config": {
+    "command": ""
+  },
+  "instructions": "<strong>💡 终端沙盒执行指南：</strong><br />• 上游节点传递过来的整包数据，会被强行压入这个终端命令的 <strong>标准输入 (stdin)</strong> 中。<br />• 执行结束后，该命令打印到屏幕上的一切 <strong>标准输出 (stdout)</strong>，将作为纯文本被直接提取并甩给下一个组件。",
+  "ui_schema": {
+    "command": {
+      "label": "终端命令",
+      "desc": "后台将通过 cmd /C [命令] 包装执行",
+      "type": "text",
+      "placeholder": "echo hello",
+      "full_width": true
+    }
+  },
+  "requires_input": false,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件"
+}

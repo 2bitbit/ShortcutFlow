@@ -1,0 +1,52 @@
+{
+  "name": "HttpRequest",
+  "description": "发射HTTP请求并获取回执——支持GET/POST/PUT/DELETE，可自定义请求头与请求体，将响应Body传递给下游节点。",
+  "default_config": {
+    "url": "https://cn.bing.com/",
+    "method": "GET",
+    "headers": "{}",
+    "body": "",
+    "timeout_secs": 30
+  },
+  "instructions": "<strong>💡 HTTP 请求组件：</strong><br/>• URL：目标地址（必填）。<br/>• Method：GET / POST / PUT / DELETE。<br/>• Headers：JSON 格式的键值对，例如 <code>{\"Authorization\":\"Bearer xxx\"}</code>。<br/>• Body：请求体文本（POST/PUT 时生效）。<br/>• 响应 Body 将以纯文本形式进入 <code>payload</code> 传递给下游。",
+  "ui_schema": {
+    "url": {
+      "label": "请求URL",
+      "type": "text",
+      "placeholder": "https://cn.bing.com/",
+      "full_width": true
+    },
+    "method": {
+      "label": "请求方法",
+      "type": "select",
+      "placeholder": "GET",
+      "options": [
+        { "label": "GET", "value": "GET" },
+        { "label": "POST", "value": "POST" },
+        { "label": "PUT", "value": "PUT" },
+        { "label": "DELETE", "value": "DELETE" }
+      ]
+    },
+    "headers": {
+      "label": "自定义请求头 (JSON)",
+      "type": "textarea",
+      "placeholder": "{}",
+      "desc": "JSON 键值对格式"
+    },
+    "body": {
+      "label": "请求体 (Body)",
+      "type": "textarea",
+      "placeholder": "留空表示不发送Body",
+      "desc": "POST/PUT 时生效"
+    },
+    "timeout_secs": {
+      "label": "超时（秒）",
+      "type": "number",
+      "desc": "默认 30 秒"
+    }
+  },
+  "requires_input": false,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件-网络"
+}

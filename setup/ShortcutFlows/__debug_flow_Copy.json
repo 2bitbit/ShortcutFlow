@@ -1,0 +1,25 @@
+{
+  "id": "__debug_flow_Copy",
+  "display_name": "🔬 复制测试",
+  "description": "2秒后模拟 Ctrl+C → 读取剪贴板 → 弹窗显示。运行后立即切换到目标窗口！（测试 Copy + ReadClipboard + Popup）",
+  "group": "调试",
+  "startup_delay_ms": 2000,
+  "nodes": [
+    {
+      "id": "c1",
+      "component_name": "Copy",
+      "config": {}
+    },
+    {
+      "id": "c2",
+      "delay_before_ms": 150,
+      "component_name": "ReadClipboard",
+      "config": {}
+    },
+    {
+      "id": "c3",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

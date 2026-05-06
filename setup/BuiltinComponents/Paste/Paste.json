@@ -1,0 +1,11 @@
+{
+  "name": "Paste",
+  "description": "拦截上游传导至此的数据放入系统粘贴板，并触发一次 Ctrl+V 操作。",
+  "default_config": {},
+  "instructions": null,
+  "ui_schema": null,
+  "requires_input": true,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-模拟操作"
+}

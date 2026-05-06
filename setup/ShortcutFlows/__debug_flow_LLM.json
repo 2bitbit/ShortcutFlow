@@ -1,0 +1,26 @@
+{
+  "id": "__debug_flow_LLM",
+  "display_name": "🔬 LLM 调用测试",
+  "description": "读取剪贴板 → LLM 处理 → Popup 显示结果。⚠️ 需要先在 LLM 组件设置中配置 API Key（设置 → 组件库 → LLM → 编辑）。测试前请 Ctrl+C 复制一段文字。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "l1",
+      "component_name": "ReadClipboard",
+      "config": {}
+    },
+    {
+      "id": "l2",
+      "component_name": "LLM",
+      "config": {
+        "system_prompt": "简洁回复用户输入，不超过一句话。",
+        "input_format": "text"
+      }
+    },
+    {
+      "id": "l3",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

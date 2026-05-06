@@ -1,0 +1,32 @@
+{
+  "id": "__debug_flow_SimulateMouse",
+  "display_name": "🔬 鼠标模拟测试",
+  "description": "2秒后点按一次左键（安全：不会移动鼠标） → 弹窗确认。测试 SimulateMouse + Popup。",
+  "group": "调试",
+  "startup_delay_ms": 2000,
+  "nodes": [
+    {
+      "id": "s1",
+      "component_name": "SimulateMouse",
+      "config": {
+        "sequence": [
+          {
+            "action": "Click",
+            "button_type": "Left",
+            "tap_count": 1,
+            "coords": ""
+          }
+        ],
+        "interval_ms": 0
+      }
+    },
+    {
+      "id": "e1",
+      "component_name": "EmitData",
+      "config": {
+        "payload": "✅ 鼠标左键单击模拟成功",
+        "metadata": "{}"
+      }
+    }
+  ]
+}

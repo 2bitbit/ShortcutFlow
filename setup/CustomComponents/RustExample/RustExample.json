@@ -1,0 +1,25 @@
+{
+  "name": "RustExample",
+  "description": "基于 Rust cargo-script 实现的图片保存脚本。它演示了如何从管线读取 JSON 以及处理后向下连通。可用作自定义组件的精美模板！",
+  "default_config": {
+    "command": "cargo +nightly -Zscript RustExample.rs",
+    "save_path": "~/Desktop/SF_RustExample.png"
+  },
+  "instructions": "<strong>💡 Rust 图片处理示例：</strong><br/>该节点展示了如何接收上个节点产生的数据，来进行自定义逻辑。<br/>基于 <code>cargo +nightly -Zscript</code> 单文件方案，自动拉取 serde / base64 等依赖。",
+  "ui_schema": {
+    "command": {
+      "label": "本地终端执行命令",
+      "desc": "启动该脚本使用的完整命令",
+      "placeholder": "cargo +nightly -Zscript RustExample.rs"
+    },
+    "save_path": {
+      "label": "保存截图的绝对路径",
+      "desc": "提取出来的图片该去向何方？",
+      "placeholder": "~/Desktop/SF_RustExample.png"
+    }
+  },
+  "requires_input": true,
+  "produces_output": true,
+  "is_builtin": false,
+  "group": "自定义示例"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "__debug_flow_HttpRequest",
+  "display_name": "🔬 HTTP 请求测试",
+  "description": "GET https://cn.bing.com/ → 弹窗显示响应。测试 HttpRequest + Popup。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "h1",
+      "component_name": "HttpRequest",
+      "config": {
+        "url": "https://cn.bing.com/",
+        "method": "GET",
+        "headers": "{}",
+        "timeout_secs": 10
+      }
+    },
+    {
+      "id": "h2",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

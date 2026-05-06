@@ -1,0 +1,30 @@
+{
+  "id": "__debug_flow_WriteClipboard",
+  "display_name": "🔬 写剪贴板测试",
+  "description": "向剪贴板写入'ShortcutFlow Debug Test' → 读取回来 → 弹窗验证。测试 WriteClipboard + ReadClipboard + Popup。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "w1",
+      "component_name": "Shell",
+      "config": {
+        "command": "echo ShortcutFlow Debug Test"
+      }
+    },
+    {
+      "id": "w2",
+      "component_name": "WriteClipboard",
+      "config": {}
+    },
+    {
+      "id": "w3",
+      "component_name": "ReadClipboard",
+      "config": {}
+    },
+    {
+      "id": "w4",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

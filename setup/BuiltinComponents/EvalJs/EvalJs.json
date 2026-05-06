@@ -1,0 +1,43 @@
+{
+  "name": "EvalJs",
+  "description": "在指定 HtmlWindow 中执行 JavaScript 代码。可用于动态更新已打开窗口的内容、样式，实现先弹窗后填充数据的效果。",
+  "default_config": {
+    "window_label": "",
+    "js_code": "",
+    "mode": "html"
+  },
+  "instructions": "<strong>💡 EvalJs 组件：</strong><br/>• <code>window_label</code>：目标窗口标签。<br/>• <code>mode</code>：<b>html</b>=将上游 payload 注入为窗口 HTML；<b>js</b>=将上游 payload 当作 JS 执行。<br/>• <code>js_code</code>：自定义 JS（留空则按 mode 处理上游 payload）。",
+  "ui_schema": {
+    "window_label": {
+      "label": "窗口标签",
+      "type": "text",
+      "placeholder": "my_window",
+      "desc": "目标 HtmlWindow 的 window_label"
+    },
+    "mode": {
+      "label": "模式",
+      "type": "select",
+      "options": [
+        {
+          "label": "HTML 注入（payload → innerHTML）",
+          "value": "html"
+        },
+        {
+          "label": "JS 执行（payload 当代码跑）",
+          "value": "js"
+        }
+      ]
+    },
+    "js_code": {
+      "label": "JS 代码",
+      "type": "textarea",
+      "placeholder": "document.body.innerHTML = '<h1>Hello</h1>'",
+      "desc": "要执行的 JavaScript。留空则使用上游 payload 文本。",
+      "full_width": true
+    }
+  },
+  "requires_input": false,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-界面"
+}

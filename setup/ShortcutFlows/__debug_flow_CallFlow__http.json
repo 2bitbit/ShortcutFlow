@@ -1,0 +1,18 @@
+{
+  "id": "__debug_flow_CallFlow__http",
+  "display_name": "🔬 CallFlow子流-HTTP",
+  "description": "CallFlow 的子流：发 HTTP 请求，不吞数据，让父流 Popup 显示结果。",
+  "group": "调试子流",
+  "nodes": [
+    {
+      "id": "h1",
+      "component_name": "HttpRequest",
+      "config": {
+        "url": "https://cn.bing.com/",
+        "method": "GET",
+        "headers": "{}",
+        "timeout_secs": 10
+      }
+    }
+  ]
+}

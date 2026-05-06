@@ -1,0 +1,44 @@
+{
+  "id": "__debug_flow_KeyListener",
+  "display_name": "🔬 按键监听测试",
+  "description": "显示指令窗口 → 等待按键 → 弹窗 → 自动关闭指令窗口。测试 HtmlWindow + KeyListener + Popup + CloseWindow。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "h1",
+      "component_name": "HtmlWindow",
+      "config": {
+        "html_content": "<html>\n  <body style='background:#1a1a2e;color:#e0e0e0;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0'>\n    <div style='text-align:center'>\n      <h1 style='color:#fbbf24'>⌨️ KeyListener 测试</h1>\n        <p style='color:#e0e0e0'>请关闭此窗口后按下 <span style='color:#4ecdc4'>F5</span> 或 <span style='color:#4ecdc4'>F6</span>\n        </p>\n        <p style='color:#888;margin-top:20px'>F5 → 弹出 \"按下的是 F5\"<br>F6 → 弹出 \"按下的是 F6\"</p>\n        </div>\n      </body>\n    </html>",
+        "x": 1250,
+        "y": 0,
+        "width": 450,
+        "height": 350,
+        "blocking": false,
+        "title": "🔬 Debug KeyListener",
+        "resizable": true,
+        "always_on_top": true,
+        "window_label": "debug_klistener"
+      }
+    },
+    {
+      "id": "k1",
+      "component_name": "KeyListener",
+      "config": {
+        "keys": "[{\"key\": \"F5\", \"payload\": \"✅ 按下的是 F5 — KeyListener 正常工作\"}, {\"key\": \"F6\", \"payload\": \"✅ 按下的是 F6 — KeyListener 正常工作\"}]",
+        "timeout_secs": 30
+      }
+    },
+    {
+      "id": "k2",
+      "component_name": "Popup",
+      "config": {}
+    },
+    {
+      "id": "k3",
+      "component_name": "CloseWindow",
+      "config": {
+        "label": "debug_klistener"
+      }
+    }
+  ]
+}

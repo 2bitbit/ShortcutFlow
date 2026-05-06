@@ -1,0 +1,21 @@
+{
+  "id": "__debug_flow_Router",
+  "display_name": "🔬 条件路由测试",
+  "description": "读取剪贴板 → Router 条件路由。复制含空格的文本（如 hello world）命中长文本分支，复制短词走兜底。测试前请先 Ctrl+C 复制一段文字。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "r1",
+      "component_name": "ReadClipboard",
+      "config": {}
+    },
+    {
+      "id": "r2",
+      "component_name": "Router",
+      "config": {
+        "rules": "[{\"condition\": {\"type\": \"regex\", \"pattern\": \"\\\\s\"}, \"subflow_id\": \"__debug_flow_Router__long\"}]",
+        "default_subflow_id": "__debug_flow_Router__short"
+      }
+    }
+  ]
+}

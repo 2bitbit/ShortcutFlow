@@ -1,0 +1,20 @@
+{
+  "name": "CloseWindow",
+  "description": "关闭指定 Tauri 窗口。搭配 HtmlWindow 的 window_label 使用，可在非阻塞模式下精确关闭指定的弹出窗口。",
+  "default_config": {
+    "label": ""
+  },
+  "instructions": "<strong>💡 关闭窗口指南：</strong><br/>• <code>label</code>：要关闭的窗口标签，必须与 HtmlWindow 的 <code>window_label</code> 字段完全一致。<br/>• 如果窗口已不存在（已关闭），不会报错。",
+  "ui_schema": {
+    "label": {
+      "label": "窗口标签 (Label)",
+      "type": "text",
+      "placeholder": "例如: my_popup_window",
+      "desc": "必须和 HtmlWindow 的 window_label 一致"
+    }
+  },
+  "requires_input": false,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-界面"
+}

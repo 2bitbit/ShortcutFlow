@@ -1,0 +1,11 @@
+{
+  "name": "ScreenCapture",
+  "description": "框选区域，将图像按 Base64 编码后传输。",
+  "default_config": {},
+  "instructions": null,
+  "ui_schema": null,
+  "requires_input": false,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件"
+}

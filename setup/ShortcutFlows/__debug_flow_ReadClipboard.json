@@ -1,0 +1,18 @@
+{
+  "id": "__debug_flow_ReadClipboard",
+  "display_name": "🔬 剪贴板读取测试",
+  "description": "读取当前剪贴板内容 → 弹窗显示。（测试 ReadClipboard + Popup）",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "r1",
+      "component_name": "ReadClipboard",
+      "config": {}
+    },
+    {
+      "id": "r2",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

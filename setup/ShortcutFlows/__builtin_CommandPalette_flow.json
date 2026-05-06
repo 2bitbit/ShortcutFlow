@@ -1,0 +1,61 @@
+{
+  "id": "__builtin_CommandPalette_flow",
+  "display_name": "快捷键指令面板",
+  "startup_delay_ms": 0,
+  "description": "Ctrl+Alt+V 在屏幕右上角弹出指令面板，按快捷键直接打出对应文本后自动关闭。不抢占焦点。",
+  "group": "内置流",
+  "shortcut": "control+alt+KeyV",
+  "nodes": [
+    {
+      "id": "show_palette",
+      "component_name": "HtmlWindow",
+      "pass_through": false,
+      "delay_before_ms": 0,
+      "config": {
+        "always_on_top": true,
+        "blocking": false,
+        "close_aborts": true,
+        "close_aborts_silent": true,
+        "focus": false,
+        "height": 650,
+        "html_content": "<html>\n  <body style='background:#12122a;color:#ccc;font-family:Consolas,monospace;margin:0;padding:12px 14px'>\n    <h3 style='color:#e94560;margin:0 0 8px;font-size:13px'>⚡ 指令面板</h3>\n      <table style='width:100%;border-collapse:collapse;font-size:12px;line-height:1.6'>\n        <tr style='color:#e94560'>\n          <td colspan='3' style='padding:4px 0 1px;font-weight:bold;font-size:11px;border-bottom:1px solid #333'>📝 文本</td>\n          </tr>\n          <tr>\n            <td style='padding:2px 6px 2px 0;color:#4ecdc4;white-space:nowrap'>Alt+1</td>\n              <td style='padding:2px 6px'>git commit -m \"\"</td>\n                <td style='padding:2px 0;color:#555;font-size:10px'>提交</td>\n                </tr>\n                <tr>\n                  <td style='padding:2px 6px 2px 0;color:#4ecdc4;white-space:nowrap'>Alt+2</td>\n                    <td style='padding:2px 6px'>git push origin main</td>\n                      <td style='padding:2px 0;color:#555;font-size:10px'>推送</td>\n                      </tr>\n                      <tr>\n                        <td style='padding:2px 6px 2px 0;color:#4ecdc4;white-space:nowrap'>Alt+3</td>\n                          <td style='padding:2px 6px'>cargo clippy 2>&1</td>\n                            <td style='padding:2px 0;color:#555;font-size:10px'>检查</td>\n                            </tr>\n                            <tr style='color:#e94560'>\n                              <td colspan='3' style='padding:6px 0 1px;font-weight:bold;font-size:11px;border-bottom:1px solid #333'>🐍 Python</td>\n                              </tr>\n                              <tr>\n                                <td style='padding:2px 6px 2px 0;color:#4ecdc4;white-space:nowrap'>Alt+F5</td>\n                                  <td style='padding:2px 6px'>uv run pytest -xvs</td>\n                                    <td style='padding:2px 0;color:#555;font-size:10px'>测试</td>\n                                    </tr>\n                                    <tr>\n                                      <td style='padding:2px 6px 2px 0;color:#4ecdc4;white-space:nowrap'>Alt+F6</td>\n                                        <td style='padding:2px 6px'>uv run python -m pdb</td>\n                                          <td style='padding:2px 0;color:#555;font-size:10px'>调试</td>\n                                          </tr>\n                                          <tr style='color:#e94560'>\n                                            <td colspan='3' style='padding:6px 0 1px;font-weight:bold;font-size:11px;border-bottom:1px solid #333'>💻 系统</td>\n                                            </tr>\n                                            <tr>\n                                              <td style='padding:2px 6px 2px 0;color:#4ecdc4;white-space:nowrap'>Alt+F7</td>\n                                                <td style='padding:2px 6px'>htop</td>\n                                                  <td style='padding:2px 0;color:#555;font-size:10px'>资源</td>\n                                                  </tr>\n                                                  <tr>\n                                                    <td style='padding:2px 6px 2px 0;color:#4ecdc4;white-space:nowrap'>Alt+F8</td>\n                                                      <td style='padding:2px 6px'>df -h</td>\n                                                        <td style='padding:2px 0;color:#555;font-size:10px'>磁盘</td>\n                                                        </tr>\n                                                      </table>\n                                                      <p style='font-size:9px;margin:8px 0 0'>Esc 关闭 · 选后自动打出</p>\n                                                      </body>\n                                                    </html>",
+        "resizable": true,
+        "title": "ShortcutFlow",
+        "width": 550,
+        "window_label": "cmd_palette",
+        "x": 1155,
+        "y": 0
+      }
+    },
+    {
+      "id": "wait_key",
+      "component_name": "KeyListener",
+      "pass_through": false,
+      "delay_before_ms": 0,
+      "config": {
+        "keys": "[{\"key\": \"Alt+1\", \"payload\": \"git commit -m \\\"\\\"\", \"metadata\": {}}, {\"key\": \"Alt+2\", \"payload\": \"git push origin main\", \"metadata\": {}}, {\"key\": \"Alt+3\", \"payload\": \"cargo clippy 2>&1\", \"metadata\": {}}, {\"key\": \"Alt+F5\", \"payload\": \"uv run pytest -xvs\", \"metadata\": {}}, {\"key\": \"Alt+F6\", \"payload\": \"uv run python -m pdb\", \"metadata\": {}}, {\"key\": \"Alt+F7\", \"payload\": \"htop\", \"metadata\": {}}, {\"key\": \"Alt+F8\", \"payload\": \"df -h\", \"metadata\": {}}, {\"key\": \"Escape\", \"payload\": \"\", \"metadata\": {}}]",
+        "timeout_secs": 30,
+        "window_label": "cmd_palette"
+      }
+    },
+    {
+      "id": "type_command",
+      "component_name": "Typing",
+      "pass_through": false,
+      "delay_before_ms": 30,
+      "config": {
+        "speed_ms": 0
+      }
+    },
+    {
+      "id": "close_palette",
+      "component_name": "CloseWindow",
+      "pass_through": false,
+      "delay_before_ms": 0,
+      "config": {
+        "label": "cmd_palette"
+      }
+    }
+  ],
+  "cwd": null
+}

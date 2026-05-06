@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "src-tauri/target/debug/BuiltinComponents",
+    },
+    {
+      "path": "src-tauri/target/debug/CustomComponents",
+    },
+    {
+      "path": "src-tauri/target/debug/ShortcutFlows",
+    },
+    {
+      "path": "src-tauri/target/release/bundle/nsis",
+    },
+  ],
+  "settings": {
+    "hide-files.files": []
+  },
+}

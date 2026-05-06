@@ -1,0 +1,11 @@
+{
+  "name": "Popup",
+  "description": "以拦截到的文本为内容，利用系统UI进行弹窗提醒！",
+  "default_config": {},
+  "instructions": null,
+  "ui_schema": null,
+  "requires_input": true,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件"
+}

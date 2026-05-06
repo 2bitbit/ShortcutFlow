@@ -1,0 +1,39 @@
+{
+  "id": "__debug_flow_SimKey",
+  "display_name": "🔬 模拟按键",
+  "description": "【仅在 debug 编译下注入的测试流】",
+  "group": "调试",
+  "shortcut": null,
+  "startup_delay_ms": 1000,
+  "nodes": [
+    {
+      "id": "dk1",
+      "delay_before_ms": 0,
+      "config": {
+        "interval_ms": 100,
+        "sequence": [
+          {
+            "action": "Click",
+            "key": "a",
+            "tap_count": 3
+          },
+          {
+            "action": "Click",
+            "key": "b",
+            "tap_count": 1
+          }
+        ]
+      },
+      "component_name": "SimulateKey"
+    },
+    {
+      "id": "e1",
+      "component_name": "EmitData",
+      "config": {
+        "payload": "✅ F13 按键模拟成功",
+        "metadata": "{}"
+      }
+    }
+  ],
+  "cwd": null
+}

@@ -1,0 +1,29 @@
+{
+  "id": "__debug_flow_Regex",
+  "display_name": "🔬 正则替换测试",
+  "description": "读取剪贴板 → 将 'hello' 替换为 'HELLO' → 弹窗。测试 ReadClipboard + Regex + Popup。",
+  "group": "调试",
+  "nodes": [
+    {
+      "id": "r1",
+      "component_name": "ReadClipboard",
+      "config": {}
+    },
+    {
+      "id": "r2",
+      "component_name": "Regex",
+      "config": {
+        "pattern": "hello",
+        "replacement": "HELLO",
+        "case_insensitive": true,
+        "multi_line": false,
+        "dot_matches_new_line": false
+      }
+    },
+    {
+      "id": "r3",
+      "component_name": "Popup",
+      "config": {}
+    }
+  ]
+}

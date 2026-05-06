@@ -1,0 +1,11 @@
+{
+  "name": "Copy",
+  "description": "向焦点区触发一次模拟复制动作。智能检测前台窗口：Windows Terminal 自动使用 Ctrl+Shift+C，其余应用使用 Ctrl+C。",
+  "default_config": {},
+  "instructions": "智能检测 Windows Terminal — 自动使用 Ctrl+Shift+C",
+  "ui_schema": null,
+  "requires_input": false,
+  "produces_output": false,
+  "is_builtin": true,
+  "group": "内置组件-模拟操作"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "LLM",
+  "description": "将图片或文本在内的任何数据流合并发给大语言模型结构化，返回纯净的输出内容。",
+  "default_config": {
+    "base_url": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+    "api_key": "",
+    "model": "doubao-seed-2-0-mini-260215",
+    "system_prompt": ""
+  },
+  "instructions": null,
+  "ui_schema": {
+    "base_url": {
+      "label": "API URL",
+      "type": "text",
+      "placeholder": "https://ark.cn-beijing.volces.com/api/v3/chat/completions"
+    },
+    "api_key": {
+      "label": "API Key",
+      "type": "password",
+      "placeholder": "sk-..."
+    },
+    "model": {
+      "label": "Model",
+      "type": "text",
+      "placeholder": "doubao-seed-2-0-mini-260215"
+    },
+    "system_prompt": {
+      "label": "System Prompt",
+      "type": "textarea",
+      "desc": "设定模型人设或系统级指令",
+      "full_width": true
+    },
+    "input_format": {
+      "label": "输入格式",
+      "type": "select",
+      "placeholder": "必须选择输入格式",
+      "options": [
+        {
+          "label": "文本",
+          "value": "text"
+        },
+        {
+          "label": "图片 (Base64)",
+          "value": "image"
+        }
+      ],
+      "desc": "不选则报错，防止忘记配置导致识别失败"
+    }
+  },
+  "requires_input": true,
+  "produces_output": true,
+  "is_builtin": true,
+  "group": "内置组件-AI组件"
+}
