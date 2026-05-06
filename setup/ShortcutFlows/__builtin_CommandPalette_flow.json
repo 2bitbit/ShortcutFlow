@@ -39,6 +39,21 @@
       }
     },
     {
+      "id": "3ca06de7-1331-4e76-8b09-76ffaa250bb8",
+      "component_name": "SimulateKey",
+      "pass_through": true,
+      "delay_before_ms": 0,
+      "config": {
+        "sequence": [
+          {
+            "action": "Release",
+            "key": "ctrl+alt+shift",
+            "tap_count": 1
+          }
+        ]
+      }
+    },
+    {
       "id": "type_command",
       "component_name": "Typing",
       "pass_through": false,

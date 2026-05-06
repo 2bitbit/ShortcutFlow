@@ -177,6 +177,7 @@ def main():
   📦 {archive}
 
   🔧 手动操作:
+     0. 确认无误后推送到 origin 分支 (git push origin main或其他分支)
 
      1. 打开:  {release_url}
 
@@ -195,7 +196,7 @@ def main():
   **安装**
   1. 下载 {archive.name}
   2. 运行 ShortcutFlow_{current}_x64-setup.exe
-  3. 解压 BuiltinComponents / CustomComponents / ShortcutFlows
+  3. 审慎地：解压 BuiltinComponents / CustomComponents / ShortcutFlows
      到安装根目录覆盖
 
   **更新内容**
