@@ -3,56 +3,44 @@
   <div align="center">
     <img src="https://img.shields.io/badge/Tauri-2.0-blue?style=flat-square&logo=tauri" alt="Tauri" />
     <img src="https://img.shields.io/badge/Rust-1.90+-orange?style=flat-square&logo=rust" alt="Rust" />
-    <img src="https://img.shields.io/badge/Vue.js-3.0-green?style=flat-square&logo=vuedotjs" alt="Vue" />
-    <img src="https://img.shields.io/badge/Platform-Windows-blue?style=flat-square"alt="Windows" />
-    <img src="https://img.shields.io/badge/Platform-Windows-blue?style=flat-square"alt="Windows" />
+    <img src="https://img.shields.io/badge/Vue.js-3.0+-green?style=flat-square&logo=vuedotjs" alt="Vue" />
+    <img src="https://img.shields.io/badge/Platform-Windows–Only-blue?style=flat-square"alt="Windows–Only" />
   </div>
 
   <div>
-      <span style="display: inline-block; padding: 4px 8px; background-color: #35b439ff; color: #ffffff; font-family: monospace; font-size: 12px; font-weight: bold; border-radius: 4px; border: 1px solid #333; user-select: none;">&lt;/&gt; HUMAN REVIEWED</span>
-      <span style=" padding: 6px 8px; background-color: rgba(233, 233, 233, 0.81); color: #0415fd; font-family: monospace; font-size: 12px; font-weight: bold; border-radius: 4px; border: 1px solid #333; user-select: none;">&lt;/&gt; <img src="./herseek_small.png"> HERSEEK COBUILD</span>
+    <img src="readme-img.png" width="360">
   </div>
   
 </div>
 
-
->[!Warning]
->项目处于原型开发中，敬请期待。
->欠个demo.gif
-
-
-超级大鲁棒！！！
-
-# 安装指导
-前往_____________________下载最近压缩包（含3个目录和一个安装程序），安装到特定目录后，把压缩包内的目录放到根目录下（这会覆盖原有的文件），安装即完成。
-
-
 ---
-**ShortcutFlow** 是一个极其轻量、高性能、高拓展性的工作流编排框架，自动化你的日常所需，显著提升效率。它可以让你将繁琐的日常键鼠操作、剪贴板处理、甚至是与大语言模型 (LLM) 的多步交互，统统编排为可视化节点，并允许**绑定到一个全局快捷键上瞬间触发**。
-
-无论是工作中的“一键智能截图转 LaTeX”，还是“绕过网页禁止粘贴的硬件级打字模拟”，全都在一念之间。
 
 <div align=center>
-<img src="./public/demo.gif" width=60%>
+<img src="demo.gif" width=65%>
 </div>
 
-> [!NOTE]
-> 当前只支持 windows 系统
-> 欢迎积极提交 PR
+## 安装指导
+1. 前往 [最新发布](https://github.com/2bitbit/ShortcutFlow/releases/latest) 下载压缩包（含3个目录和一个安装程序）
+2. 执行安装程序/程式
+3. 把压缩包内的目录放到根目录下
 
-## 🌟 核心特性
+完成。
 
-- 🎯 **全局劫持，一键唤起**：将编排好的复杂工作流绑定到系统级快捷键，即使在后台静默运行也能随时响应。
-- 🧱 **自由的可视化编排**：内置优雅的深色模式流编辑器。如同拼接乐高一般，自由设定数据的“流入”与“流出”，随时调整每个节点的启动延时。
-- 🧠 **原生的 AI 互联**：自带极简的 OpenAI 格式节点，可将其作为管线枢纽，无缝承接来自上文的剪贴板或截图数据，输出结果。
-- 🔌 **语言无关的无边界拓展**：嫌默认组件不够？通过开放式的 Shell 节点组件，你可以用 Python、Rust、Node 等任何你喜欢的语言编写本地脚本，将其直接桥接入自动化管线！
-- 🗄️ **极客风日志诊断**：内置沉浸式日志查看面板，完美捕获底层 Rust 引擎的每一步节点执行状态与错漏追踪。
+## 简略介绍
+**ShortcutFlow** 是一个轻量、低内存占用、高拓展性的工作流编排框架，自动化你的日常所需，显著提升效率，不打断你的心流。
 
-> [!WARNING] 初次启动会有卡顿，那是正在初始化。
+它可以让你将繁琐的日常键鼠操作、剪贴板处理、甚至是与大语言模型 (LLM) 的多步交互，统统编排为可视化节点，并允许自定义流，然后**绑定到一个全局快捷键上瞬间触发**。
 
-## 🧩 开箱即用的内置节点
+## 🧩 拼出个未来
+### 🧩 开箱即用的内置流
+- 极速模拟人手打字（绕过禁止粘贴）
+- 快捷键指令面板（一键唤起面板，一键 type 出预置内容）
+- 屏幕截取OCR至剪贴板（本地运行，快速 OCR）
+- 智能OCR与排版修复（支持latex、markdown识别）
 
-ShortcutFlow 预装了多种针对桌面环境深度优化的原子节点：
+
+### 🧩 开箱即用的内置节点
+ShortcutFlow 预装了多种针对桌面环境深度优化的内置组件：
 
 | 节点组件                 | 连通性约定  | 描述说明                                                                               |
 | ------------------------ | ----------- | -------------------------------------------------------------------------------------- |
@@ -73,15 +61,13 @@ ShortcutFlow 预装了多种针对桌面环境深度优化的原子节点：
 | 📋 **Copy**              | *产生数据*  | 向焦点区触发模拟 `Ctrl+C` 复制文本或图片（Base64）到剪贴板。                            |
 | 📝 **WriteClipboard**    | *依赖输入*  | 将上游 payload 写入系统剪贴板。                                                        |
 | 🧹 **ClearClipboard**    | *产生数据*  | 清空系统剪贴板内容。                                                                   |
-
-## 🚀 热门玩法示例
-
-- **「公式识别与自动输入」**： `ScreenCapture` 截图 ➔ `LLM` 提示词剥离为 LaTeX ➔ `Paste` 将公式源码一键粘贴进你的论文或笔记。
-- **「绕过限制死区打字」**： `ReadClipboard` 获取剪切板资料 ➔ `Typing` 模拟人手按键敲击，突破任何前端防粘贴系统。
-- **「极速外部归档」**： `Copy` 模拟系统复制 ➔ `Shell` 呼叫你的私有 Python 脚本自动整理到本地知识库 ➔ `Popup` 右下角弹窗提示成功。
+### 🧩 简单地自定义你的组件
+- 可参考 https://github.com/2bitbit/ShortcutFlow/tree/main/docs 内的教程。
+- 可参考内置示例的自定义组件。
 
 
+<br>
 <div align="center">
-  <sub>Built with ❤️ by Hackers, for Hackers.</sub>
+  <sub>成都之心：🍑</sub>
 </div>
 

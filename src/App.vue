@@ -63,7 +63,7 @@ onMounted(async () => {
       if (lightweightTimer) clearTimeout(lightweightTimer);
       lightweightTimer = setTimeout(async () => {
         try {
-          await invoke('enter_lightweight_mode');
+          await invoke('enter_lightweight_mode', { force: false });
         } catch (e) {
           console.error('自动轻量模式失败:', e);
         }

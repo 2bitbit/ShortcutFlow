@@ -63,12 +63,24 @@ fn exit_app(app: tauri::AppHandle) {
     app.exit(0);
 }
 
-/// 进入轻量模式：关闭主窗口，释放 WebView 内存，保留托盘和快捷键
+/// 进入轻量模式：销毁主窗口，释放 WebView 内存，保留托盘和快捷键
+/// 使用 destroy() 而非 close()：close() 会触发 CloseRequested 事件，
+/// 前端 onCloseRequested handler 会 preventDefault() 阻止关闭，导致窗口
+/// 从未真正关闭 + WebView 内存从未释放 + 按钮卡在"正在进入...".
+/// destroy() 强制销毁窗口，不触发 CloseRequested，绕过前端拦截。
+///
+/// force=true：无条件销毁（手动点击"立即进入"按钮）
+/// force=false：仅当窗口不可见时才销毁（自动轻量 timer，防止用户在延迟期内
+///   通过托盘恢复了窗口后被误杀）
 #[tauri::command]
-fn enter_lightweight_mode(app: tauri::AppHandle) -> Result<(), String> {
+fn enter_lightweight_mode(app: tauri::AppHandle, force: bool) -> Result<(), String> {
     if let Some(window) = app.get_webview_window("main") {
-        window.close().map_err(|e| e.to_string())?;
-        log::info!("已进入轻量模式：主窗口已关闭，WebView 已释放");
+        if !force && window.is_visible().unwrap_or(false) {
+            log::info!("轻量模式跳过：窗口已恢复可见（用户可能通过托盘恢复）");
+            return Ok(());
+        }
+        window.destroy().map_err(|e| e.to_string())?;
+        log::info!("已进入轻量模式：主窗口已销毁，WebView 已释放");
     }
     Ok(())
 }
@@ -235,6 +247,15 @@ tauri::Builder::default()
             enter_lightweight_mode,
             exit_lightweight_mode
         ])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .build(tauri::generate_context!())
+        .expect("error while building tauri application")
+        .run(|_app_handle, event| {
+            if let tauri::RunEvent::ExitRequested { api, code, .. } = event {
+                // 自动退出（所有窗口关闭）→ 阻止，让托盘保持进程存活
+                // 显式退出（exit(0)、托盘"退出"菜单）→ 放行（code = Some(0)）
+                if code.is_none() {
+                    api.prevent_exit();
+                }
+            }
+        });
 }

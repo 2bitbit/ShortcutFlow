@@ -196,8 +196,7 @@ def main():
   **安装**
   1. 下载 {archive.name}
   2. 运行 ShortcutFlow_{current}_x64-setup.exe
-  3. 审慎地：解压 BuiltinComponents / CustomComponents / ShortcutFlows
-     到安装根目录覆盖
+  3. 审慎地：解压 BuiltinComponents / CustomComponents / ShortcutFlows 到安装根目录，选择性地覆盖
 
   **更新内容**
   （在此填写）

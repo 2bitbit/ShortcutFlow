@@ -90,7 +90,7 @@ async function saveLightweightDelay() {
 async function enterLightweight() {
   enteringLightweight.value = true;
   try {
-    await invoke('enter_lightweight_mode');
+    await invoke('enter_lightweight_mode', { force: true });
   } catch (e) {
     console.error("进入轻量模式失败:", e);
     enteringLightweight.value = false;
