@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { enable, isEnabled, disable } from '@tauri-apps/plugin-autostart';
 import { invoke } from '@tauri-apps/api/core';
+import { openUrl } from '@tauri-apps/plugin-opener';
 import {
   getRunInBackground, setRunInBackground,
   getLightweightAuto, setLightweightAuto,
@@ -45,7 +46,7 @@ async function checkUpdate() {
 
 function openUpdatePage() {
   if (updateUrl.value) {
-    window.open(updateUrl.value, '_blank');
+    openUrl(updateUrl.value);
   }
 }
 
