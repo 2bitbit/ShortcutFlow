@@ -133,10 +133,10 @@ def main():
     section("1/4  编译 Release")
     log("⏳", "npm run tauri build")
     run(["npm", "run", "tauri", "build"], cwd=ROOT_DIR, shell=True)
-    nsis = sorted(RELEASE_NSIS.glob("*.exe"))
-    if not nsis:
-        die(f"未找到 NSIS 安装包 ({RELEASE_NSIS})")
-    log("✅", f"安装包: {nsis[0].name}")
+    nsis_file = RELEASE_NSIS / f"ShortcutFlow_{current}_x64-setup.exe"
+    if not nsis_file.exists():
+        die(f"未找到 NSIS 安装包 ({nsis_file})")
+    log("✅", f"安装包: {nsis_file.name}")
 
     # 2. 同步
     section("2/4  同步 setup → release")
@@ -151,7 +151,7 @@ def main():
     FINAL_RELEASE_DIR.mkdir(parents=True, exist_ok=True)
     archive.unlink(missing_ok=True)
 
-    items = [str(RELEASE_DIR / d) for d in SETUP_SUBDIRS] + [str(nsis[0])]
+    items = [str(RELEASE_DIR / d) for d in SETUP_SUBDIRS] + [str(nsis_file)]
     log("⏳", "7z -mx=9 -mmt=on（排除 __debug*）")
     run(
         [
