@@ -3,20 +3,35 @@
   "display_name": "极速模拟人手打字",
   "description": "模拟打字以绕过禁止粘贴。内容为剪贴板内容。",
   "group": "内置流",
-  "shortcut": null,
+  "shortcut": "ctrl+shift+alt+v",
   "startup_delay_ms": 0,
   "nodes": [
     {
       "id": "t1",
+      "component_name": "SimulateKey",
+      "pass_through": true,
+      "delay_before_ms": 0,
+      "config": {
+        "sequence": [
+          {
+            "action": "Release",
+            "key": "ctrl+alt+shift",
+            "tap_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "t2",
       "delay_before_ms": 0,
       "config": {},
       "component_name": "ReadClipboard"
     },
     {
-      "id": "t2",
+      "id": "t3",
       "delay_before_ms": 50,
       "config": {
-        "speed_ms": 1
+        "speed_ms": 0
       },
       "component_name": "Typing"
     }
