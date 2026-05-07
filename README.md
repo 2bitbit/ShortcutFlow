@@ -16,7 +16,7 @@
 ---
 
 <div align=center>
-<img src="demo.gif" width=65%>
+<img src="demo-optimized.gif" width=65%>
 </div>
 
 ## 安装指导
