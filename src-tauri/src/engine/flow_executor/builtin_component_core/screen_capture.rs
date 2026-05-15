@@ -71,7 +71,7 @@ fn capture_with_minifb() -> Result<Option<Vec<u8>>, String> {
 
     #[cfg(target_os = "windows")]
     {
-        let hwnd = window.get_window_handle() as *mut std::ffi::c_void;
+        let hwnd = window.get_window_handle();
         unsafe {
             use windows_sys::Win32::UI::WindowsAndMessaging::{
                 GWL_STYLE, GetWindowLongPtrW, SWP_FRAMECHANGED, SWP_NOMOVE, SWP_NOSIZE,
@@ -131,11 +131,10 @@ fn capture_with_minifb() -> Result<Option<Vec<u8>>, String> {
         }
 
         current_buffer.copy_from_slice(&dark_bg);
-        if is_drawing_rectangle {
-            if let (Some(s), Some(e)) = (start_pos, end_pos) {
+        if is_drawing_rectangle
+            && let (Some(s), Some(e)) = (start_pos, end_pos) {
                 draw_rectangle(s, e, &mut current_buffer, width, height, &original_bg);
             }
-        }
         window
             .update_with_buffer(&current_buffer, width, height)
             .unwrap();

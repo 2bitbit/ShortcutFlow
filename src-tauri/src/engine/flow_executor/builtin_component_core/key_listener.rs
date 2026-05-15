@@ -83,7 +83,7 @@ pub async fn execute(app: tauri::AppHandle, ctx: ExecutionContext) -> Result<Dat
         fn drop(&mut self) {
             let gs = self.app.global_shortcut();
             for sc in &self.registered {
-                let _ = gs.unregister(sc.clone());
+                let _ = gs.unregister(*sc);
             }
         }
     }
@@ -97,7 +97,7 @@ pub async fn execute(app: tauri::AppHandle, ctx: ExecutionContext) -> Result<Dat
         let idx = i;
         let shortcut_str = mapping.shortcut_str.clone();
 
-        gs.on_shortcut(mapping.shortcut.clone(), move |_app, _sc, event| {
+        gs.on_shortcut(mapping.shortcut, move |_app, _sc, event| {
             if event.state == ShortcutState::Pressed {
                 log::info!("KeyListener: 按键 '{}' 被按下", shortcut_str);
                 let mut guard = triggered_clone.lock().unwrap();
@@ -107,7 +107,7 @@ pub async fn execute(app: tauri::AppHandle, ctx: ExecutionContext) -> Result<Dat
             }
         })
         .with_context(|| format!("KeyListener: 注册快捷键 '{}' 失败", mapping.shortcut_str))?;
-        guard.registered.push(mapping.shortcut.clone());
+        guard.registered.push(mapping.shortcut);
     }
 
     // Esc 处理：若已在 keys 中则由用户配置接管，否则注册内置取消逻辑
@@ -116,14 +116,14 @@ pub async fn execute(app: tauri::AppHandle, ctx: ExecutionContext) -> Result<Dat
         let esc: Shortcut = serde_json::from_value(Value::String("Escape".to_string()))
             .with_context(|| "KeyListener: 无法解析 Esc")?;
         let cancelled_clone = cancelled.clone();
-        gs.on_shortcut(esc.clone(), move |_app, _sc, event| {
+        gs.on_shortcut(esc, move |_app, _sc, event| {
             if event.state == ShortcutState::Pressed {
                 log::info!("KeyListener: Esc 取消（不在 keys 中）");
                 *cancelled_clone.lock().unwrap() = true;
             }
         })
         .with_context(|| "KeyListener: 注册 Esc 快捷键失败")?;
-        guard.registered.push(esc.clone());
+        guard.registered.push(esc);
     } else {
         log::info!("KeyListener: Esc 在 keys 中，跳过内置 Esc 取消逻辑");
     }

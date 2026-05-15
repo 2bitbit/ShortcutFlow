@@ -24,7 +24,7 @@ impl ShortcutManager {
     /// 要修改已有的快捷键时调用这个。（不管旧流有没有快捷键，都会返回 Ok）
     pub fn update(&self, id_flow_to_exec: &str, shortcut: Shortcut) -> Result<()> {
         // 旧流一定要能被获取，否则 update 函数就报错。
-        let old_flow = get_flow_by_id(&self.app_handle.state(), &id_flow_to_exec)
+        let old_flow = get_flow_by_id(&self.app_handle.state(), id_flow_to_exec)
             .with_context(|| format!("未能获取id为{id_flow_to_exec} 的流"))?
             .with_context(|| format!("id为{id_flow_to_exec} 的流不存在"))?;
         if let Some(old_shortcut) = old_flow.shortcut {
@@ -40,14 +40,13 @@ impl ShortcutManager {
     /// 新增快捷键时调用这个
     pub fn add(&self, id_flow_to_exec: &str, shortcut: Shortcut) -> Result<()> {
         let all_flows =
-            get_all_flows(&self.app_handle.state()).with_context(|| format!("未能获取所有的流"))?;
+            get_all_flows(&self.app_handle.state()).with_context(|| "未能获取所有的流".to_string())?;
 
         for flow in all_flows.into_iter().filter(|f| f.id != id_flow_to_exec) {
-            if let Some(existing_shortcut) = flow.shortcut {
-                if existing_shortcut == shortcut {
+            if let Some(existing_shortcut) = flow.shortcut
+                && existing_shortcut == shortcut {
                     anyhow::bail!("快捷键: {}已被其余流: {}占用", shortcut, flow.display_name)
                 }
-            }
         }
         self.register(id_flow_to_exec, shortcut).with_context(|| {
             format!("未能为流(id: {id_flow_to_exec})成功 register 新的快捷键({shortcut:?})")
@@ -108,7 +107,7 @@ impl ShortcutManager {
                                 app,
                                 MessageDialogKind::Error,
                                 "获取流时失败",
-                                &format!("没找到流，快捷键已过期，请进行刷新"),
+                                "没找到流，快捷键已过期，请进行刷新",
                             );
                         }
                         Err(e) => {

@@ -7,7 +7,7 @@ pub async fn execute(ctx: ExecutionContext) -> Result<DataEnvelope> {
     let config = ctx
         .input_data
         .metadata
-        .with_context(|| format!("metadata为空！"))?;
+        .with_context(|| "metadata为空！".to_string())?;
     let base_url = config
         .get("base_url")
         .and_then(|v| v.as_str())

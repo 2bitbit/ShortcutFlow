@@ -29,8 +29,8 @@ pub async fn execute(ctx: ExecutionContext) -> Result<DataEnvelope> {
 
             if button_type == "Move" || button_type == "移动" {
                 let parts: Vec<&str> = coords_str.split(',').collect();
-                if parts.len() == 2 {
-                    if let (Ok(x), Ok(y)) = (
+                if parts.len() == 2
+                    && let (Ok(x), Ok(y)) = (
                         parts[0].trim().parse::<i32>(),
                         parts[1].trim().parse::<i32>(),
                     ) {
@@ -52,7 +52,6 @@ pub async fn execute(ctx: ExecutionContext) -> Result<DataEnvelope> {
                             let _ = enigo.move_mouse(x, y, Coordinate::Abs);
                         }
                     }
-                }
             } else {
                 let btn = match button_type {
                     "Right" | "右键" => Button::Right,
@@ -67,7 +66,19 @@ pub async fn execute(ctx: ExecutionContext) -> Result<DataEnvelope> {
                     "Release" | "释放" => {
                         let _ = enigo.button(btn, Direction::Release);
                     }
-                    "Click" | "点按" | _ => {
+                    "Click" | "点按" => {
+                        if tap_count < 1 {
+                            tap_count = 1;
+                        }
+                        for _ in 0..tap_count {
+                            let _ = enigo.button(btn, Direction::Click);
+                            if tap_count > 1 && interval_ms > 0 {
+                                tokio::time::sleep(tokio::time::Duration::from_millis(interval_ms))
+                                    .await;
+                            }
+                        }
+                    }
+                    _ => {
                         if tap_count < 1 {
                             tap_count = 1;
                         }

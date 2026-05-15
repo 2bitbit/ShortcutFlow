@@ -113,11 +113,10 @@ pub async fn run_flow(
         for (_, v) in merged_config.iter_mut() {
             if let Some(s) = v.as_str() {
                 let trimmed = s.trim();
-                if trimmed.starts_with('{') || trimmed.starts_with('[') {
-                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(trimmed) {
+                if (trimmed.starts_with('{') || trimmed.starts_with('['))
+                    && let Ok(parsed) = serde_json::from_str::<serde_json::Value>(trimmed) {
                         *v = parsed;
                     }
-                }
             }
         }
 
@@ -233,11 +232,7 @@ async fn execute_single_node(
         .parse::<BuiltinComponentType>()
         .unwrap_or(BuiltinComponentType::Shell); // 保底用 Shell，作为自定义组件触发。
 
-    if target_component.is_builtin {
-        builtin_component_core::run_component_logic(app, state, comp_type, ctx).await
-    } else {
-        builtin_component_core::run_component_logic(app, state, comp_type, ctx).await
-    }
+    builtin_component_core::run_component_logic(app, state, comp_type, ctx).await
 }
 
 fn resolve_node_cwd(
@@ -253,11 +248,11 @@ fn resolve_node_cwd(
 
     if let Some(flow_cwd_path) = flow_cwd_opt {
         if flow_cwd_path.is_absolute() {
-            return Ok(flow_cwd_path.to_path_buf());
+            Ok(flow_cwd_path.to_path_buf())
         } else {
             anyhow::bail!("流的工作目录不是合法的绝对路径!");
         }
     } else {
-        return Ok(default_cwd);
+        Ok(default_cwd)
     }
 }

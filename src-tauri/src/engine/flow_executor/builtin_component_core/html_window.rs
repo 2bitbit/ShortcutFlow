@@ -121,8 +121,8 @@ pub async fn execute(app: tauri::AppHandle, ctx: ExecutionContext) -> Result<Dat
 
     if !blocking {
         // 非阻塞模式：注册关闭事件监听，若 close_aborts 则关闭窗口时取消整条流
-        if close_aborts {
-            if let (Some(flow_cancelled), Some(flow_cancel_notify)) =
+        if close_aborts
+            && let (Some(flow_cancelled), Some(flow_cancel_notify)) =
                 (ctx.flow_cancelled.clone(), ctx.flow_cancel_notify.clone())
             {
                 let label_for_log = label.clone();
@@ -137,7 +137,6 @@ pub async fn execute(app: tauri::AppHandle, ctx: ExecutionContext) -> Result<Dat
                     }
                 });
             }
-        }
         let cleanup_path = html_path.clone();
         tokio::spawn(async move {
             tokio::time::sleep(tokio::time::Duration::from_secs(3)).await;
@@ -151,11 +150,10 @@ pub async fn execute(app: tauri::AppHandle, ctx: ExecutionContext) -> Result<Dat
     let tx_opt = std::sync::Mutex::new(Some(tx));
 
     window.on_window_event(move |event| {
-        if let WindowEvent::CloseRequested { .. } = event {
-            if let Some(tx) = tx_opt.lock().unwrap().take() {
+        if let WindowEvent::CloseRequested { .. } = event
+            && let Some(tx) = tx_opt.lock().unwrap().take() {
                 let _ = tx.send(());
             }
-        }
     });
 
     log::info!("HtmlWindow: 阻塞模式 — 等待窗口关闭 '{}' ...", label);

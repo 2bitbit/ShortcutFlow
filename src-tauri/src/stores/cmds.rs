@@ -17,7 +17,7 @@ pub fn get_all_components(
         .inspect_err(|e| {
             let title = "获取所有组件时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -33,7 +33,7 @@ pub fn get_component_by_name(
         .inspect_err(|e| {
             let title = "按名字获取组件时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -48,7 +48,7 @@ pub fn save_custom_component(
         .inspect_err(|e| {
             let title = "保存自定义组件时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -63,7 +63,7 @@ pub fn delete_custom_component(
         .inspect_err(|e| {
             let title = "删除自定义组件时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -74,7 +74,7 @@ pub fn get_all_flows(app: AppHandle, state: State<'_, AppState>) -> Result<BTree
         .inspect_err(|e| {
             let title = "获取所有流时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -89,7 +89,7 @@ pub fn get_flow_by_id(
         .inspect_err(|e| {
             let title = "通过id获取流时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -100,7 +100,7 @@ pub fn save_flow(app: AppHandle, state: State<'_, AppState>, flow: Flow) -> Resu
         .inspect_err(|e| {
             let title = "保存流时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -115,7 +115,7 @@ pub fn delete_flow(
         .inspect_err(|e| {
             let title = "删除流时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -126,7 +126,7 @@ pub fn read_logs(app: AppHandle, state: State<'_, AppState>) -> Result<String, S
         .inspect_err(|e| {
             let title = "读取日志时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }
@@ -137,7 +137,7 @@ pub fn export_logs_to_file(app: AppHandle, path: String, content: String) -> Res
         .inspect_err(|e| {
             let title = "导出日志时失败";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| format!("{:?}", e))
 }

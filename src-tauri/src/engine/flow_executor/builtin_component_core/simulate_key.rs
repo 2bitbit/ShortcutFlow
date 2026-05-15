@@ -96,7 +96,7 @@ pub async fn execute(ctx: ExecutionContext) -> Result<DataEnvelope> {
                         let _ = enigo.key(*key, Direction::Release);
                     }
                 }
-                "Click" | "点按" | _ => {
+                "Click" | "点按" => {
                     if tap_count < 1 {
                         tap_count = 1;
                     }
@@ -106,6 +106,23 @@ pub async fn execute(ctx: ExecutionContext) -> Result<DataEnvelope> {
                             let _ = enigo.key(*key, Direction::Press);
                         }
                         // 释放所有按键（反向释放）
+                        for key in keys.iter().rev() {
+                            let _ = enigo.key(*key, Direction::Release);
+                        }
+                        if tap_count > 1 && interval_ms > 0 {
+                            tokio::time::sleep(tokio::time::Duration::from_millis(interval_ms))
+                                .await;
+                        }
+                    }
+                }
+                _ => {
+                    if tap_count < 1 {
+                        tap_count = 1;
+                    }
+                    for _ in 0..tap_count {
+                        for key in &keys {
+                            let _ = enigo.key(*key, Direction::Press);
+                        }
                         for key in keys.iter().rev() {
                             let _ = enigo.key(*key, Direction::Release);
                         }

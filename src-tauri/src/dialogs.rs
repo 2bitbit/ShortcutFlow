@@ -18,7 +18,7 @@ pub fn pop_error_dialog_native(title: &str, msg: &str) {
 /// 这个函数仅仅是用来弹窗告知，并未设计任何交互逻辑。
 pub fn pop_do_nothing_dialog(app: AppHandle, kind: MessageDialogKind, title: &str, msg: &str) {
     app.dialog() // Tauri 的 dialog() API 留给那些处理失败，但应用还能继续运行的常规业务错误。
-        .message(format!("{}", msg))
+        .message(msg.to_string())
         .title(title)
         .kind(kind)
         .show(|_| {});

@@ -18,7 +18,7 @@ pub async fn run_flow_by_id(
             log::error!("❌flow execution failed: {:?}", e);
             let title = "ShortcutFlow 运行错误";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
             Err(e.to_string())
         }
     }
@@ -35,7 +35,7 @@ pub async fn refreash_all_flow_shortcut(
             log::error!("❌刷新所有流的快捷键时失败: {:?}", e);
             let title = "ShortcutFlow 运行错误";
             let msg = format!("错误原因: {:?}", e);
-            pop_do_nothing_dialog(app, MessageDialogKind::Error, &title, &msg);
+            pop_do_nothing_dialog(app, MessageDialogKind::Error, title, &msg);
         })
         .map_err(|e| e.to_string())
 }

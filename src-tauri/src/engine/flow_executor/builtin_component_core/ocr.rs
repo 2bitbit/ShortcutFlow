@@ -15,7 +15,7 @@ pub async fn execute(ctx: ExecutionContext) -> Result<DataEnvelope> {
 
     // 解码 Base64 图像
     let img_bytes = general_purpose::STANDARD
-        .decode(&b64_img)
+        .decode(b64_img)
         .map_err(|e| anyhow::anyhow!("Base64 decoding failed: {}", e))?;
 
     // 提取配置并解析为绝对路径

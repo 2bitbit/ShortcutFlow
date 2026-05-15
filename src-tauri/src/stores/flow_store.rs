@@ -114,7 +114,7 @@ pub fn save_flow(state: &AppState, flow: Flow) -> Result<()> {
 }
 
 pub fn delete_flow_by_id(state: &AppState, flow_id: &str) -> Result<()> {
-    let flow = get_flow_by_id(state, &flow_id)
+    let flow = get_flow_by_id(state, flow_id)
         .with_context(|| format!("未能按id成功获取流(流id: {})", flow_id))?;
 
     let Some(flow) = flow else {

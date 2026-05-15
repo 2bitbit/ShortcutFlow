@@ -38,7 +38,7 @@ impl AppState {
 impl AppState {
     pub fn init_shortcut_manager(&self, app_handle: AppHandle) {
         let shortcut_manager: ShortcutManager = ShortcutManager::new(app_handle);
-        if let Err(_) = self.shortcut_manager.set(shortcut_manager) {
+        if self.shortcut_manager.set(shortcut_manager).is_err() {
             panic!("未能成功初始化快捷键管理器，可能是已经多次初始化");
         }
     }

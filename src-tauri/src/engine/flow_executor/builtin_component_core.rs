@@ -39,8 +39,10 @@ pub enum BuiltinComponentType {
     HtmlWindow,
     HttpRequest,
     KeyListener,
-    LLM,
-    OCR,
+    #[strum(serialize = "LLM")]
+    Llm,
+    #[strum(serialize = "OCR")]
+    Ocr,
     Popup,
     Paste,
     ReadClipboard,
@@ -65,7 +67,7 @@ pub async fn run_component_logic(
     use BuiltinComponentType::*;
     match builtin_comp_type {
         ScreenCapture => screen_capture::execute().await,
-        LLM => llm::execute(ctx).await,
+        Llm => llm::execute(ctx).await,
         Paste => paste::execute(ctx).await,
         Copy => copy::execute().await,
         EmitData => emit_data::execute(ctx).await,
@@ -76,7 +78,7 @@ pub async fn run_component_logic(
         HttpRequest => http_request::execute(ctx).await,
         KeyListener => key_listener::execute(app, ctx).await,
         Typing => typing::execute(ctx).await,
-        OCR => ocr::execute(ctx).await,
+        Ocr => ocr::execute(ctx).await,
         WriteClipboard => write_clipboard::execute(ctx).await,
         Regex => regex_replace::execute(ctx).await,
         Router => router::execute(app, ctx).await,
