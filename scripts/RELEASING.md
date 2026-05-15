@@ -41,6 +41,7 @@ git commit -m "v新版本"
 
 ```bash
 git tag -a v新版本 -m "v新版本"
+git push --follow-tags
 ```
 
 Tag 指向的 commit 就包含了完整的功能代码 + 版本号。
@@ -59,18 +60,3 @@ release.py 会自动：
 5. 同步 `setup/` → `target/release/`
 6. 7z 极限压缩打包
 7. 打开 GitHub Releases 页面并打印上传指引
-
-### 6. 推送 + 上传
-
-```bash
-git push --follow-tags
-# 然后在浏览器中上传 .7z 到 GitHub Releases
-```
-
-## 涉及文件
-
-| 文件 | 用途 |
-|------|------|
-| `scripts/bump_version.py` | 更新三处版本号 |
-| `scripts/release.py` | 构建 → 同步 → 打包 → 指引 |
-| `RELEASING.md` | 本文档 |
