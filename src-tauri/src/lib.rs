@@ -8,6 +8,7 @@ use crate::app_state::AppState;
 use anyhow::Result;
 use serde::Deserialize;
 use tauri::Manager;
+use tauri_plugin_store::StoreExt;
 
 /// GitHub 最新 Release 的 JSON 结构（只关心 tag_name 和 html_url）
 #[derive(Deserialize)]
@@ -159,6 +160,25 @@ tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             app.manage(app_state);
+
+            // 通过自动启动运行时最小化窗口（autostart 插件传入 --minimized 标志）
+            if std::env::args().any(|a| a == "--minimized") {
+                let state = app.state::<AppState>();
+                let store_path = state.dirs().root_dir().join("ui_settings.json");
+                let should_minimize = app
+                    .store(store_path)
+                    .ok()
+                    .and_then(|store| store.get("minimize_on_startup"))
+                    .and_then(|v| v.as_bool())
+                    .unwrap_or(true); // 读取失败时默认最小化
+                if should_minimize
+                    && let Some(window) = app.get_webview_window("main")
+                {
+                    let _ = window.minimize();
+                    log::info!("自动启动：已最小化窗口");
+                }
+            }
+
             app.state::<AppState>()
                 .init_shortcut_manager(app.handle().clone());
 

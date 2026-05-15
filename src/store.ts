@@ -106,3 +106,25 @@ export async function setLightweightDelay(value: number) {
   await store.set('lightweight_delay', value);
   await store.save();
 }
+
+// --- 开机自启时最小化 ---
+
+export const minimizeOnStartupCache = ref(true);
+
+export async function getMinimizeOnStartup(): Promise<boolean> {
+  try {
+    const store = await getStore();
+    const v = await store.get<boolean>('minimize_on_startup');
+    minimizeOnStartupCache.value = v ?? true;
+    return minimizeOnStartupCache.value;
+  } catch {
+    return true;
+  }
+}
+
+export async function setMinimizeOnStartup(value: boolean) {
+  minimizeOnStartupCache.value = value;
+  const store = await getStore();
+  await store.set('minimize_on_startup', value);
+  await store.save();
+}

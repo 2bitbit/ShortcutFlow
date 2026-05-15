@@ -6,7 +6,8 @@ import { openUrl } from '@tauri-apps/plugin-opener';
 import {
   getRunInBackground, setRunInBackground,
   getLightweightAuto, setLightweightAuto,
-  getLightweightDelay, setLightweightDelay
+  getLightweightDelay, setLightweightDelay,
+  getMinimizeOnStartup, setMinimizeOnStartup
 } from '../store';
 import LogViewer from './LogViewer.vue';
 
@@ -14,6 +15,7 @@ const autoStartEnabled = ref(false);
 const runInBackground = ref(true);
 const lightweightAuto = ref(false);
 const lightweightDelay = ref(30);
+const minimizeOnStartup = ref(true);
 const showLogViewer = ref(false);
 const enteringLightweight = ref(false);
 
@@ -59,6 +61,7 @@ onMounted(async () => {
   runInBackground.value = await getRunInBackground();
   lightweightAuto.value = await getLightweightAuto();
   lightweightDelay.value = await getLightweightDelay();
+  minimizeOnStartup.value = await getMinimizeOnStartup();
 });
 
 async function toggleAutoStart() {
@@ -76,6 +79,10 @@ async function toggleAutoStart() {
 
 async function toggleRunInBackground() {
   await setRunInBackground(runInBackground.value);
+}
+
+async function toggleMinimizeOnStartup() {
+  await setMinimizeOnStartup(minimizeOnStartup.value);
 }
 
 async function toggleLightweightAuto() {
@@ -120,6 +127,19 @@ async function enterLightweight() {
           <div class="setting-control">
             <label class="switch">
               <input type="checkbox" v-model="autoStartEnabled" @change="toggleAutoStart">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>开机自启时最小化</h4>
+            <p>开启后，开机自启动时窗口会自动最小化至系统托盘，安静运行。</p>
+          </div>
+          <div class="setting-control">
+            <label class="switch">
+              <input type="checkbox" v-model="minimizeOnStartup" @change="toggleMinimizeOnStartup">
               <span class="slider round"></span>
             </label>
           </div>
