@@ -15,13 +15,13 @@
 ### 2. Bump 版本号
 
 ```bash
-uv run scripts/bump_version.py 1.0.5
+uv run scripts/bump_version.py
 ```
 
 这会同步更新下面三个文件的版本号：
-- `src-tauri/Cargo.toml` — `version = "1.0.5"`
-- `src-tauri/tauri.conf.json` — `"version": "1.0.5"`
-- `package.json` — `"version": "1.0.5"`
+- `src-tauri/Cargo.toml` 
+- `src-tauri/tauri.conf.json` 
+- `package.json`
 
 验证一致性：
 ```bash
@@ -32,7 +32,7 @@ uv run scripts/bump_version.py --check
 
 ```bash
 git add -A
-git commit -m "feat: 功能描述"
+git commit -m "v新版本"
 ```
 
 此时版本号 bump 已经在 commit 里了。`git show HEAD` 应该既能看到功能改动，也能看到版本号变化。
@@ -40,7 +40,7 @@ git commit -m "feat: 功能描述"
 ### 4. 打 Tag
 
 ```bash
-git tag -a v1.0.5 -m "v1.0.5"
+git tag -a v新版本 -m "v新版本"
 ```
 
 Tag 指向的 commit 就包含了完整的功能代码 + 版本号。
@@ -54,7 +54,7 @@ uv run scripts/release.py
 release.py 会自动：
 1. 检查工作区干净（无未提交改动）
 2. 检查版本号三处一致
-3. 检查 `v1.0.5` tag 指向 HEAD
+3. 检查新版本的 tag 指向 HEAD
 4. `npm run tauri build` 编译
 5. 同步 `setup/` → `target/release/`
 6. 7z 极限压缩打包
