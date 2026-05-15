@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """
-ShortcutFlow 一键发布
+ShortcutFlow 发布打包
 =====================
-用法（交互式）：   uv run ./scripts/release.py
-用法（指定版本）： uv run ./scripts/release.py 0.2.0
+自 v1.0.4 起，版本号 bump 独立为 bump_version.py。
+本脚本只负责构建 → 同步 → 打包 → 输出发布指引。
 
-流程：
-  0. 统一更新版本号（Cargo.toml / tauri.conf.json / package.json）
-  1. 编译 Release（npm run tauri build）
-  2. 同步 setup 到 release 目录
-  3. 7z 极限压缩打包
-  4. 打开 GitHub Releases → 打印发布指南
+前置条件（由开发者自行完成）：
+  1. bump_version.py 0.x.x   （更新版本号）
+  2. git commit               （提交，版本号随功能一起入 commit）
+  3. git tag v0.x.x           （打 tag）
+
+用法:
+    uv run scripts/release.py          # 从 Cargo.toml 读取版本号
+    uv run scripts/release.py 0.2.0    # 指定版本号（用于回退等场景）
 
 依赖：7-Zip, Node.js, Rust
 """
@@ -54,50 +56,56 @@ def run(cmd: list[str], cwd=None, shell=False):
         die(f"命令失败: {' '.join(cmd)}")
 
 
-# ── 版本号读写 ─────────────────────────────────────
+# ── 版本号读取 ─────────────────────────────────────
 def read_version() -> str:
     """从 Cargo.toml 读取当前版本"""
     t = CARGO_TOML.read_text("utf-8")
     m = re.search(r'^version\s*=\s*"([^"]+)"', t, re.MULTILINE)
     if not m:
         die("未在 Cargo.toml 中找到 version 字段")
-    assert m
     return m.group(1)
 
 
-def bump_version(new_ver: str):
-    """把三处版本号统一更新为新版本"""
-    old_ver = read_version()
-    if new_ver == old_ver:
-        log("ℹ️", f"版本未变 ({new_ver})，跳过更新")
-        return
+def check_versions_consistent():
+    """验证三处版本号一致"""
+    versions = {}
+    for path, pattern in [
+        (CARGO_TOML, r'^version\s*=\s*"([^"]+)"'),
+        (TAURI_CONF, r'"version"\s*:\s*"([^"]+)"'),
+        (PACKAGE_JSON, r'"version"\s*:\s*"([^"]+)"'),
+    ]:
+        t = path.read_text("utf-8")
+        m = re.search(pattern, t, re.MULTILINE)
+        v = m.group(1) if m else "??? 未找到"
+        versions[path.name] = v
 
-    log("⏳", f"统一更新版本号: {old_ver} → {new_ver}")
-
-    # Cargo.toml: version = "x.y.z"
-    _replace(CARGO_TOML, rf'^(version\s*=\s*)"{old_ver}"', rf'\1"{new_ver}"')
-    log("✅", "Cargo.toml")
-
-    # tauri.conf.json: "version": "x.y.z"
-    _replace(TAURI_CONF, rf'("version"\s*:\s*)"{old_ver}"', rf'\1"{new_ver}"')
-    log("✅", "tauri.conf.json")
-
-    # package.json: "version": "x.y.z"
-    _replace(PACKAGE_JSON, rf'("version"\s*:\s*)"{old_ver}"', rf'\1"{new_ver}"')
-    log("✅", "package.json")
-
-
-def _replace(path: Path, pattern: str, repl: str):
-    text = path.read_text("utf-8")
-    new_text, n = re.subn(pattern, repl, text, flags=re.MULTILINE)
-    if n != 1:
-        die(f"{path.name}: 期望替换 1 处，实际 {n} 处（版本号可能不唯一）")
-    path.write_text(new_text, "utf-8")
+    unique = set(versions.values())
+    if len(unique) != 1:
+        print("❌ 三处版本号不一致：")
+        for name, ver in versions.items():
+            print(f"   {name}: {ver}")
+        die("请先运行 uv run scripts/bump_version.py --check 检查")
 
 
 # ── 主流程 ─────────────────────────────────────────
 def main():
-    # -1. 安全检查：不允许有未提交的改动，防止版本号改了但构建失败时无法回滚
+    # 0. 版本号
+    file_version = read_version()
+
+    if len(sys.argv) > 1:
+        cli_version = sys.argv[1]
+        if cli_version != file_version:
+            die(
+                f"命令行版本 ({cli_version}) 与 Cargo.toml ({file_version}) 不一致。\n"
+                f"如需更换版本号，请先运行 uv run scripts/bump_version.py {cli_version}"
+            )
+    current = file_version
+
+    check_versions_consistent()
+    tag = f"v{current}"
+    archive = FINAL_RELEASE_DIR / f"ShortcutFlow_{current}.7z"
+
+    # -1. 安全检查
     result = subprocess.run(
         ["git", "status", "--porcelain"],
         cwd=ROOT_DIR, capture_output=True, text=True
@@ -108,22 +116,17 @@ def main():
             + result.stdout.strip()[:500]
         )
 
-    # 0. 版本号
-    current = read_version()
-
-    # 命令行参数 > 交互式输入
-    if len(sys.argv) > 1:
-        new_ver = sys.argv[1]
-    else:
-        print(f"\n  当前版本: {current}")
-        new_ver = input("  请输入新版本号 (回车跳过): ").strip()
-
-    if new_ver and new_ver != current:
-        bump_version(new_ver)
-        current = new_ver
-
-    tag = f"v{current}"
-    archive = FINAL_RELEASE_DIR / f"ShortcutFlow_{current}.7z"
+    # 检查 tag 是否存在且指向 HEAD
+    tag_result = subprocess.run(
+        ["git", "tag", "--points-at", "HEAD"],
+        cwd=ROOT_DIR, capture_output=True, text=True
+    )
+    if tag not in tag_result.stdout.strip().split("\n"):
+        print(f"  ⚠️  当前 HEAD 上没有 tag {tag}")
+        print(f"  HEAD 上的 tag: {tag_result.stdout.strip() or '(无)'}")
+        answer = input(f"  是否继续？[y/N] ").strip().lower()
+        if answer != "y":
+            die("已取消。请先: git tag -a {tag} -m '{tag}'")
 
     print("\n  ╔═══════════════════════════════╗")
     print(f"  ║  ShortcutFlow 发布 {tag:<12} ║")
@@ -177,12 +180,12 @@ def main():
   📦 {archive}
 
   🔧 手动操作:
-     0. 确认无误后推送到 origin 分支 (git push origin main或其他分支)
+     0. 确认无误后推送到 origin (git push --follow-tags)
 
      1. 打开:  {release_url}
 
      2. 填写:
-        • Tag:  {tag}（不存在则 Create new tag）
+        • Tag:  {tag}（已存在，从下拉框选择）
         • Title: ShortcutFlow {current}
 
      3. 上传 {archive.name}
