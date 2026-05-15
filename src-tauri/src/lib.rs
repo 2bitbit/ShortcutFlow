@@ -162,20 +162,30 @@ tauri::Builder::default()
             app.manage(app_state);
 
             // 通过自动启动运行时最小化窗口（autostart 插件传入 --minimized 标志）
-            if std::env::args().any(|a| a == "--minimized") {
+            // 窗口默认 visible: false（tauri.conf.json），此处决定是否显示
+            let is_autostart = std::env::args().any(|a| a == "--minimized");
+            if is_autostart {
                 let state = app.state::<AppState>();
                 let store_path = state.dirs().root_dir().join("ui_settings.json");
-                let should_minimize = app
+                let should_hide = app
                     .store(store_path)
                     .ok()
                     .and_then(|store| store.get("minimize_on_startup"))
                     .and_then(|v| v.as_bool())
-                    .unwrap_or(true); // 读取失败时默认最小化
-                if should_minimize
-                    && let Some(window) = app.get_webview_window("main")
-                {
-                    let _ = window.minimize();
-                    log::info!("自动启动：已最小化窗口");
+                    .unwrap_or(true);
+                if !should_hide {
+                    // 用户关闭了"开机自启时最小化"，正常显示窗口
+                    if let Some(window) = app.get_webview_window("main") {
+                        let _ = window.show();
+                        let _ = window.set_focus();
+                    }
+                }
+                // should_hide=true: 窗口保持隐藏（托盘运行），用户点击托盘图标恢复
+            } else {
+                // 手动启动：正常显示窗口
+                if let Some(window) = app.get_webview_window("main") {
+                    let _ = window.show();
+                    let _ = window.set_focus();
                 }
             }
 
