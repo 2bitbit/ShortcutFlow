@@ -1,39 +1,39 @@
 {
-  "id": "__builtin_OCR_with_LLM_flow",
-  "display_name": "智能OCR与排版修复",
-  "description": "框选区域并调用 LLM 进行高精度文字识别。支持复杂的 Markdown 和 LaTeX 公式，并能保持原本的段落结构。结果会复制到粘贴板。",
-  "group": "内置流",
-  "shortcut": "Control+Alt+L",
-  "startup_delay_ms": 0,
-  "nodes": [
-    {
-      "id": "c1",
-      "delay_before_ms": 0,
-      "config": {},
-      "component_name": "ScreenCapture"
-    },
-    {
-      "id": "clear_clip",
-      "delay_before_ms": 0,
-      "pass_through": true,
-      "config": {},
-      "component_name": "ClearClipboard"
-    },
-    {
-      "id": "c2",
-      "delay_before_ms": 0,
-      "config": {
-        "system_prompt": "请提取图片中的全部文字内容。要求：\n1. 准确识别并保留原有的 Markdown 格式编排和 LaTeX 公式语段。\n2. 智能识别并修复被强制截断的换行：对于仅因页面跨度、显示宽度受限等因素而产生的物理换行，请将其首尾相接合并为一个连贯的段落空间；只在文字逻辑上原本真正的段落结束或标题处，才保留真正的回车换行符。\n3. 请纯净地输出最终处理好的文段结果，绝对不要携带任何诸如“这是提取的文本”等额外的对话、解释或说明语。\n特别说明，如果图片中仅含latex公式，则按照这个要求输出：请仅仅输入图片中公式的 LaTex 源码，不要带markdown格式的符号（例如诸如$、\\[、```此类的任何东西）包裹。",
-        "input_format": "image"
-      },
-      "component_name": "LLM"
-    },
-    {
-      "id": "c3",
-      "delay_before_ms": 0,
-      "config": {},
-      "component_name": "WriteClipboard"
-    }
-  ],
-  "cwd": null
+	"id": "__builtin_OCR_with_LLM_flow",
+	"display_name": "智能OCR与排版修复",
+	"description": "框选区域并调用 LLM 进行高精度文字识别。支持复杂的 Markdown 和 LaTeX 公式，并能保持原本的段落结构。结果会复制到粘贴板。",
+	"group": "内置流",
+	"shortcut": "Control+Alt+0",
+	"startup_delay_ms": 0,
+	"nodes": [
+		{
+			"id": "c1",
+			"delay_before_ms": 0,
+			"config": {},
+			"component_name": "ScreenCapture"
+		},
+		{
+			"id": "clear_clip",
+			"delay_before_ms": 0,
+			"pass_through": true,
+			"config": {},
+			"component_name": "ClearClipboard"
+		},
+		{
+			"id": "c2",
+			"delay_before_ms": 0,
+			"config": {
+				"system_prompt": "请提取图片中的全部文字内容。要求：\n1. 准确识别并保留原有的 Markdown 格式编排和 LaTeX 公式语段。\n2. 智能识别并修复被强制截断的换行：对于仅因页面跨度、显示宽度受限等因素而产生的物理换行，请将其首尾相接合并为一个连贯的段落空间；只在文字逻辑上原本真正的段落结束或标题处，才保留真正的回车换行符。\n3. 请纯净地输出最终处理好的文段结果，绝对不要携带任何诸如“这是提取的文本”等额外的对话、解释或说明语。\n特别说明，如果图片中仅含latex公式，则按照这个要求输出：请仅仅输入图片中公式的 LaTex 源码，不要带markdown格式的符号（例如诸如$、\\[、```此类的任何东西）包裹。",
+				"input_format": "image"
+			},
+			"component_name": "LLM"
+		},
+		{
+			"id": "c3",
+			"delay_before_ms": 0,
+			"config": {},
+			"component_name": "WriteClipboard"
+		}
+	],
+	"cwd": null
 }
